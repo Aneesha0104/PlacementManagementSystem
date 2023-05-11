@@ -1,8 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using PMS;
+using PMS.DAL.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddApplicationDependencies();
+var connectionString = builder.Configuration.GetConnectionString("BConnectConnection");
+builder.Services.AddDbContext<PmsdbContext>(x => x.UseSqlServer(connectionString));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.12.0" />
+    <PackageReference Include="MimeKit" Version="2.12.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PMS.BOL\PMS.BOL.csproj" />
+    <ProjectReference Include="..\PMS.DAL\PMS.DAL.csproj" />
+  </ItemGroup>
+
+</Project>

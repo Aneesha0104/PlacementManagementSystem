@@ -5,3 +5,9 @@
 /PMS/bin/Debug/net6.0
 /.vs
 /PMS/obj
+/PMS.BLL/bin/Debug
+/PMS.BLL/obj
+/PMS.BOL/bin/Debug
+/PMS.BOL/obj
+/PMS.DAL/bin/Debug
+/PMS.DAL/obj

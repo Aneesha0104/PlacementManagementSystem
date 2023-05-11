@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PMS.BLL;
 using PMS.Models;
 using System.Diagnostics;
 
@@ -7,14 +8,16 @@ namespace PMS.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        IUserBLL _userBLL;
+        public HomeController(ILogger<HomeController> logger,IUserBLL userBLL)
         {
             _logger = logger;
+            _userBLL= userBLL;
         }
 
         public IActionResult Index()
         {
+            var user = _userBLL.GetUserByID(1);
             return View();
         }
 

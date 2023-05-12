@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddApplicationDependencies();
-var connectionString = builder.Configuration.GetConnectionString("BConnectConnection");
+var connectionString = builder.Configuration.GetConnectionString("PMSConnectConnection");
 builder.Services.AddDbContext<PmsdbContext>(x => x.UseSqlServer(connectionString));
 var app = builder.Build();
 

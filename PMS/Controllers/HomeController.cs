@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using PMS.BLL;
+using PMS.BOL;
 using PMS.Models;
 using System.Diagnostics;
 
@@ -25,7 +28,49 @@ namespace PMS.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Login(UserDto userDto)
+        {
+            if (userDto != null)
+            {
+                var user = _userBLL.GetUserByCredentials(userDto);
+                LoggedInUserVM userVm = new LoggedInUserVM();
+                if (user.UserId != 0)
+                {
+                    switch (user.Usertype)
+                    {
+                        case (byte)PMSEnums.UserType.STUDENT:
 
+
+                            break;
+                        case (byte)PMSEnums.UserType.COLLEGE:
+
+                            break;
+                        case (byte)PMSEnums.UserType.COMPANY:
+
+                            break;
+                        case (byte)PMSEnums.UserType.ADMIN:
+                            userVm.UserType = (byte)PMSEnums.UserType.ADMIN;
+                            userVm.UserName = "Admin";
+                            //Admin
+
+                            break;
+                    }
+                    HttpContext.Session.SetString("LoggedInUser", JsonConvert.SerializeObject(userVm));
+                }
+                else
+                {
+                    ViewBag.ErrorMsg = "Username or password is incorrect.";
+                    return View();
+                }
+            }
+            return RedirectToAction("Index","Home");
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

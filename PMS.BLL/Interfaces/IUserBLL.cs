@@ -10,5 +10,6 @@ namespace PMS.BLL
     public interface IUserBLL
     {
         UserDto GetUserByID(int id);
+        UserDto GetUserByCredentials(UserDto userDto);
     }
 }

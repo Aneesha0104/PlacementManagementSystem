@@ -23,7 +23,8 @@ namespace PMS.BOL
         }
         public enum UserType : byte
         {
-
+            [EnumTextValue("Admin")]
+            ADMIN,
             [EnumTextValue("Student")]
             STUDENT,
             [EnumTextValue("College")]

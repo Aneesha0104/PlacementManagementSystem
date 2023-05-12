@@ -19,5 +19,6 @@ namespace PMS.BOL
         public DateTime CreatedOn { get; set; }
 
         public byte Status { get; set; }
+        public StudentDto StudentDto { get; set; }
     }
 }

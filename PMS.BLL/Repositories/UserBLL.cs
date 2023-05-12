@@ -25,6 +25,13 @@ namespace PMS.BLL
             if (user != null) CopyToDto(user, userDto); 
             return userDto; 
         }
+        public UserDto GetUserByCredentials(UserDto userDto)
+        {
+            var _userDto = new UserDto();
+            var user = _userRepository.FirstOrDefault(x => x.Username == userDto.Username && x.Password==userDto.Password);
+            if (user != null) CopyToDto(user, userDto);
+            return userDto;
+        }
         #region Copy 
         void CopyFromDto(UserDto source, User target)
         {
@@ -37,6 +44,7 @@ namespace PMS.BLL
             target.Username = source.Username;
             target.Password = source.Password;
             target.Usertype = source.Usertype;
+            target.UserId = source.UserId;
         }
         #endregion
     }

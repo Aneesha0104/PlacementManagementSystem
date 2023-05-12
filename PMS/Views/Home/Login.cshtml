@@ -66,11 +66,9 @@
                 </div>
                 }
                     <div class="social-auth-links text-center mt-2 mb-3">
-                         @*<i class="fa fa-address-card"></i> *@
-                            @Html.ActionLink("Student Registration","Register",new { controller = "Home" },new { @class="btn btn-block btn-primary "})
-                    @*<a href="#" class="btn btn-block btn-primary">*@
-                  
-                   
+                    <a href="@Url.ActionLink("Register","Home")" class="btn btn-outline-info btn-block btn-flat" >
+                    <i class="fa fa-address-card"></i> Student Registeration
+                    </a>
                     @*<a href="#" class="btn btn-block btn-danger">
                     <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
                     </a>*@

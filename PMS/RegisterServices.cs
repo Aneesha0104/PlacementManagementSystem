@@ -19,7 +19,6 @@ namespace PMS
             services.AddScoped<ICollegeBLL, CollegeBLL>();
             services.AddScoped<ICompanyBLL, CompanyBLL>();
 
-
             return services;
         }
     }

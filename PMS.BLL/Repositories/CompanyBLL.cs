@@ -39,6 +39,7 @@ namespace PMS.BLL
             target.UserId= source.UserId;
             if(source.UserDto !=null)
             {
+                target.User = new User();
                 target.User.Username=source.UserDto.Username;
                 target.User.Password=source.UserDto.Password;
                 target.User.CreatedOn = DateTime.Now;
@@ -59,6 +60,7 @@ namespace PMS.BLL
             target.UserId = source.UserId;
             if (source.User != null)
             {
+                target.UserDto = new UserDto();
                 target.UserDto.Username = source.User.Username;
                 target.UserDto.CreatedOn = DateTime.Now;
                 target.UserDto.Usertype =source.User.Usertype;

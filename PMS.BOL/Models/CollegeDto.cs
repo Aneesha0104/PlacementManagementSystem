@@ -18,7 +18,7 @@ namespace PMS.BOL
 
         public byte Status { get; set; }
 
-       
+       public UserDto UserDto { get; set; }
 
     }
 }

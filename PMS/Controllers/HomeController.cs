@@ -12,15 +12,19 @@ namespace PMS.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         IUserBLL _userBLL;
-        public HomeController(ILogger<HomeController> logger, IUserBLL userBLL)
+        ICollegeBLL _collegeBLL;
+        ICompanyBLL _companyBLL;
+        public HomeController(ILogger<HomeController> logger, IUserBLL userBLL,ICollegeBLL collegeBLL,ICompanyBLL companyBLL)
         {
             _logger = logger;
             _userBLL = userBLL;
+            _collegeBLL = collegeBLL;
+            _companyBLL= companyBLL;
         }
 
         public IActionResult Index()
         {
-            var user = _userBLL.GetUserByID(1);
+            ViewBag.userDetails = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
             return View();
         }
 
@@ -55,10 +59,14 @@ namespace PMS.Controllers
 
                             break;
                         case (byte)PMSEnums.UserType.COLLEGE:
-
+                            userVm.CollegeDto = _collegeBLL.GetCollegeByUserId(userDto.UserId);
+                            userVm.UserName = userDto.Username;
+                            userVm.UserType = (byte)PMSEnums.UserType.COLLEGE;
                             break;
                         case (byte)PMSEnums.UserType.COMPANY:
-
+                            userVm.CompanyDto = _companyBLL.GetCompanyByUserId(userDto.UserId);
+                            userVm.UserName = userDto.Username;
+                            userVm.UserType = (byte)PMSEnums.UserType.COMPANY;
                             break;
                         case (byte)PMSEnums.UserType.ADMIN:
                             userVm.UserType = (byte)PMSEnums.UserType.ADMIN;
@@ -67,7 +75,7 @@ namespace PMS.Controllers
 
                             break;
                     }
-                    HttpContext.Session.SetString("LoggedInUser", JsonConvert.SerializeObject(userVm));
+                    HttpContext.Session.SetObject("LoggedInUser", userVm);
                 }
                 else
                 {

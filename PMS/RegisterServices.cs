@@ -10,10 +10,14 @@ namespace PMS
 
             // Data Repos
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICollegeRepository, CollegeRepository>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
 
 
             // Services
             services.AddScoped<IUserBLL, UserBLL>();
+            services.AddScoped<ICollegeBLL, CollegeBLL>();
+            services.AddScoped<ICompanyBLL, CompanyBLL>();
 
 
             return services;

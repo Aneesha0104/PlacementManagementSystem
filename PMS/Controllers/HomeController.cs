@@ -12,10 +12,10 @@ namespace PMS.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         IUserBLL _userBLL;
-        public HomeController(ILogger<HomeController> logger,IUserBLL userBLL)
+        public HomeController(ILogger<HomeController> logger, IUserBLL userBLL)
         {
             _logger = logger;
-            _userBLL= userBLL;
+            _userBLL = userBLL;
         }
 
         public IActionResult Index()
@@ -33,6 +33,11 @@ namespace PMS.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
+        public IActionResult Register()
+        {
+            return View();
+        }
         [HttpPost]
         public IActionResult Login(UserDto userDto)
         {
@@ -45,7 +50,8 @@ namespace PMS.Controllers
                     switch (user.Usertype)
                     {
                         case (byte)PMSEnums.UserType.STUDENT:
-
+                            userVm.UserType = (byte)PMSEnums.UserType.STUDENT;
+                            userVm.UserName = userDto.Username;
 
                             break;
                         case (byte)PMSEnums.UserType.COLLEGE:
@@ -69,7 +75,30 @@ namespace PMS.Controllers
                     return View();
                 }
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public IActionResult Register(UserDto userDto)
+        {
+            if (ModelState.IsValid && userDto != null)
+            {               
+                if (_userBLL.CheckUserAlreadyRegistered(userDto))
+                {
+                    ViewBag.ErrorMsg = "Account is already registered. Try with a different Username";
+                    return View();
+                }
+
+                userDto.Usertype = (byte)PMSEnums.UserType.STUDENT;
+                userDto.CreatedOn = DateTime.Now;
+                userDto.Status = (byte)PMSEnums.RecordStatus.ACTIVE;
+                _userBLL.CreateStudent(userDto);
+
+                Login(userDto);
+
+                return RedirectToAction("Index", "Home");
+            }
+            ViewBag.ErrorMsg = "Confirm  Password doesn't match, Try again!";
+            return View();
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

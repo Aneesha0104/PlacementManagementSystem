@@ -32,12 +32,26 @@ namespace PMS.BLL
             if (user != null) CopyToDto(user, userDto);
             return userDto;
         }
+        public bool CheckUserAlreadyRegistered(UserDto userDto)
+        {
+            var _userDto = new UserDto();
+            var user = _userRepository.FirstOrDefault(x => x.Username == userDto.Username );
+            return user != null;
+        }
+        public void CreateStudent(UserDto student)
+        {
+            var user = new User();
+            CopyFromDto(student, user);
+            _userRepository.Insert(user);
+        }
         #region Copy 
         void CopyFromDto(UserDto source, User target)
         {
             target.Username = source.Username;
             target.Password = source.Password;  
             target.Usertype = source.Usertype;
+            target.Status = source.Status;
+            target.CreatedOn = source.CreatedOn;
         }
         void CopyToDto(User source, UserDto target)
         {

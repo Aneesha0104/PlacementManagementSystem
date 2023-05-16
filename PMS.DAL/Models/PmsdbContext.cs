@@ -36,8 +36,8 @@ public partial class PmsdbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder
-       .UseLazyLoadingProxies();
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=TRPRD58XH2Y8-L\\SQLEXPRESS;Database=PMSDB;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -245,51 +245,36 @@ public partial class PmsdbContext : DbContext
 
             entity.Property(e => e.StudentId).HasColumnName("StudentID");
             entity.Property(e => e.AcademicDetailId).HasColumnName("AcademicDetailID");
-            entity.Property(e => e.AcademicYear)
-                .IsRequired()
-                .HasMaxLength(30);
-            entity.Property(e => e.Address)
-                .IsRequired()
-                .HasMaxLength(100);
+            entity.Property(e => e.AcademicYear).HasMaxLength(30);
+            entity.Property(e => e.Address).HasMaxLength(100);
             entity.Property(e => e.CreatedOn).HasColumnType("date");
             entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
-            entity.Property(e => e.District)
-                .IsRequired()
-                .HasMaxLength(50);
+            entity.Property(e => e.District).HasMaxLength(50);
             entity.Property(e => e.Dob)
                 .HasColumnType("datetime")
                 .HasColumnName("DOB");
             entity.Property(e => e.EmailId)
                 .HasMaxLength(50)
                 .HasColumnName("EmailID");
-            entity.Property(e => e.Gender)
-                .IsRequired()
-                .HasMaxLength(10);
+            entity.Property(e => e.Gender).HasMaxLength(10);
             entity.Property(e => e.Hobbies).HasMaxLength(50);
             entity.Property(e => e.MaritalStatus).HasMaxLength(20);
             entity.Property(e => e.MobileNo).HasMaxLength(50);
-            entity.Property(e => e.Mothertongue)
-                .IsRequired()
-                .HasMaxLength(50);
+            entity.Property(e => e.Mothertongue).HasMaxLength(50);
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(50);
             entity.Property(e => e.NameOfGuardian).HasMaxLength(50);
             entity.Property(e => e.Occupation).HasMaxLength(50);
             entity.Property(e => e.Pin).HasColumnType("numeric(18, 0)");
-            entity.Property(e => e.RegisterNo)
-                .IsRequired()
-                .HasMaxLength(10);
+            entity.Property(e => e.RegisterNo).HasMaxLength(10);
             entity.Property(e => e.Remarks).HasMaxLength(50);
             entity.Property(e => e.Skills).HasMaxLength(50);
-            entity.Property(e => e.State)
-                .IsRequired()
-                .HasMaxLength(50);
+            entity.Property(e => e.State).HasMaxLength(50);
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
             entity.HasOne(d => d.AcademicDetail).WithMany(p => p.Students)
                 .HasForeignKey(d => d.AcademicDetailId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Students_AcademicDetails");
 
             entity.HasOne(d => d.Department).WithMany(p => p.Students)
@@ -299,6 +284,7 @@ public partial class PmsdbContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.Students)
                 .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Students_Users");
         });
 

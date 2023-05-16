@@ -13,7 +13,7 @@ public partial class Student
 
     public string Gender { get; set; }
 
-    public DateTime Dob { get; set; }
+    public DateTime? Dob { get; set; }
 
     public string MobileNo { get; set; }
 
@@ -25,7 +25,7 @@ public partial class Student
 
     public string State { get; set; }
 
-    public decimal Pin { get; set; }
+    public decimal? Pin { get; set; }
 
     public string NameOfGuardian { get; set; }
 
@@ -35,11 +35,11 @@ public partial class Student
 
     public string Mothertongue { get; set; }
 
-    public int? UserId { get; set; }
+    public int UserId { get; set; }
 
     public int DepartmentId { get; set; }
 
-    public int AcademicDetailId { get; set; }
+    public int? AcademicDetailId { get; set; }
 
     public string AcademicYear { get; set; }
 

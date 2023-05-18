@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace PMS.BLL
 {
@@ -20,10 +22,25 @@ namespace PMS.BLL
 
         public CollegeDto GetCollegeByUserId(int userId)
         {
-            var college = _collegeRepository.FirstOrDefault(x => x.UserId == userId);
+            var college = _collegeRepository.FirstOrDefault(x => x.UserId == userId,include: x=>x.Include(y=>y.User));
             var collegeDto=new CollegeDto();
             if (college == null) CopyToDto(college, collegeDto);
             return collegeDto;
+        }
+        public List<CollegeDto> GetAllCollegeBll()
+        {
+            var college = _collegeRepository.GetAll(x => x.Status == (byte)PMSEnums.RecordStatus.ACTIVE,x=>x.User);
+            var collegeDtoList = new List<CollegeDto>();
+            if (college != null)
+            {
+                foreach(var item in college)
+                {
+                    var collegeDto =new CollegeDto();
+                    CopyToDto(item, collegeDto);
+                    collegeDtoList.Add(collegeDto);
+                }
+            }
+            return collegeDtoList;
         }
         #region Copy 
         void CopyFromDto(CollegeDto source, College target)

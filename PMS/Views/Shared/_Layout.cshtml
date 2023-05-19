@@ -236,7 +236,7 @@
                 </div>
 
                 <!-- Sidebar Menu -->
-                @if (userDetails?.UserType == 0) //company
+                @if (userDetails?.UserType == 0) //Admin
                 {
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -251,7 +251,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="@Url.ActionLink("Index","College")" class="nav-link">
                                     <i class="nav-icon fas fa-graduation-cap"></i>
                                     <p>
                                         College

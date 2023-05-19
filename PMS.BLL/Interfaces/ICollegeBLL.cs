@@ -7,5 +7,8 @@ namespace PMS.BLL
     {
         CollegeDto GetCollegeByUserId(int userId);
         List<CollegeDto> GetAllCollegeBll();
+         CollegeDto GetCollegeByCollegeId(int collegeID);
+        bool UpdateCollege(CollegeDto collegeDto);
+        bool CreateCollege(CollegeDto collegeDto);
     }
 }

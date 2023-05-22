@@ -42,16 +42,6 @@ namespace PMS.Controllers
         {
             return View();
         }
-
-        public IActionResult College()
-        {
-            return View();
-        }
-
-        public IActionResult Company()
-        {
-            return View();
-        }
         
         [HttpPost]
         public IActionResult Login(UserDto userDto)

@@ -7,16 +7,16 @@ using System.Text;
 
 namespace PMS.DAL
 {
-  public interface IGenericRepository<TEntity> where TEntity : class
-  {
-    IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate = null);
-    TEntity Get(Func<TEntity, bool> predicate = null);
-    TEntity Insert(TEntity entity);
-    void Update(TEntity entity);
-    void Update(TEntity oldEntity, TEntity newEntity);
-    void Delete(TEntity entity);
-    void DeleteRange(IQueryable<TEntity> entities);
-    IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+    public interface IGenericRepository<TEntity> where TEntity : class
+    {
+        IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate = null, params Expression<Func<TEntity, object>>[] includeProperties);
+        TEntity Get(Func<TEntity, bool> predicate = null, params Expression<Func<TEntity, object>>[] includeProperties);
+        TEntity Insert(TEntity entity);
+        void Update(TEntity entity);
+        void Update(TEntity oldEntity, TEntity newEntity);
+        void Delete(TEntity entity);
+        void DeleteRange(IQueryable<TEntity> entities);
+        IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
         bool Any(Expression<Func<TEntity, bool>> predicate);
         TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
@@ -24,7 +24,7 @@ namespace PMS.DAL
 
              bool disableTracking = false);
         int GetRecordCount(Expression<Func<TEntity, bool>> predicate);
-    IEnumerable<TEntity> GetDistinct(IEqualityComparer<TEntity> Comparer);
-    void Delete(Expression<Func<TEntity, bool>> predicate);
-  }
+        IEnumerable<TEntity> GetDistinct(IEqualityComparer<TEntity> Comparer);
+        void Delete(Expression<Func<TEntity, bool>> predicate);
+    }
 }

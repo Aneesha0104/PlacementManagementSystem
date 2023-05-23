@@ -35,7 +35,7 @@ public partial class PmsdbContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-  
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AcademicDetail>(entity =>
@@ -76,7 +76,7 @@ public partial class PmsdbContext : DbContext
             entity.ToTable("College");
 
             entity.Property(e => e.CollegeId).HasColumnName("CollegeID");
-            entity.Property(e => e.Address).HasMaxLength(10);
+            entity.Property(e => e.Address).HasMaxLength(100);
             entity.Property(e => e.CollegeName)
                 .IsRequired()
                 .HasMaxLength(50);
@@ -144,9 +144,7 @@ public partial class PmsdbContext : DbContext
         {
             entity.ToTable("Department");
 
-            entity.Property(e => e.DepartmentId)
-                .ValueGeneratedNever()
-                .HasColumnName("DepartmentID");
+            entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
             entity.Property(e => e.CollegeId).HasColumnName("CollegeID");
             entity.Property(e => e.CreatedOn).HasColumnType("date");
             entity.Property(e => e.Description).HasMaxLength(50);

@@ -1,0 +1,68 @@
+﻿@model PMS.BOL.DepartmentDto
+@{
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Department</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Department</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                @if (ViewBag.ErrorCnfMsg != null)
+                {
+                    <div class="card-body">
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
+                            @ViewBag.ErrorCnfMsg
+                        </div>
+                    </div>
+                }
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Update Department Details</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    @using (Html.BeginForm("Edit", "Department", FormMethod.Post))
+                    {
+                        @Html.HiddenFor(model => model.DepartmentId)
+                        <div class="card-body">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, "Name")
+                                @Html.TextBoxFor(x => x.Name, new { @class = "form-control",@placeholder="Name",@required=true })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description, "Description")
+                                @Html.TextAreaFor(x => x.Description, new { @class = "form-control",@placeholder="Description" })
+                            </div>
+                            
+  
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary float-right">Submit</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

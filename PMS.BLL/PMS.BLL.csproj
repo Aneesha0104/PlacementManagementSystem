@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\IPlacedStudents.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MailKit" Version="2.12.0" />
     <PackageReference Include="MimeKit" Version="2.12.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

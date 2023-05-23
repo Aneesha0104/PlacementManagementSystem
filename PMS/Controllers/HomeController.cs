@@ -26,7 +26,7 @@ namespace PMS.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.userDetails = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+           // ViewBag.userDetails = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
             return View();
         }
 
@@ -44,6 +44,7 @@ namespace PMS.Controllers
         {
             return View();
         }
+        
         [HttpPost]
         public IActionResult Login(UserDto userDto)
         {

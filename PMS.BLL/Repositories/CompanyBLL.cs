@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace PMS.BLL
 {
@@ -24,6 +26,21 @@ namespace PMS.BLL
             var companyDto=new CompanyDto();
             if (company == null) CopyToDto(company, companyDto);
             return companyDto;
+        }
+        public List<CompanyDto> GetAllCompanyBll()
+        {
+            var company = _companyRepository.GetAll(x => x.Status == (byte)PMSEnums.RecordStatus.ACTIVE, x => x.User);
+            var companyDtoList = new List<CompanyDto>();
+            if (company != null)
+            {
+                foreach (var item in company)
+                {
+                    var companyDto = new CompanyDto();
+                    CopyToDto(item, companyDto);
+                    companyDtoList.Add(companyDto);
+                }
+            }
+            return companyDtoList;
         }
         #region Copy 
         void CopyFromDto(CompanyDto source, Company target)

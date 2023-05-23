@@ -18,17 +18,27 @@ namespace PMS.DAL
             _dbContext = Context;
             _Dbset = _dbContext.Set<Tentity>();
         }
-        public IEnumerable<Tentity> GetAll(Func<Tentity, bool> predicate = null)
+        public IEnumerable<Tentity> GetAll(Func<Tentity, bool> predicate = null, params Expression<Func<Tentity, object>>[] includeProperties)
         {
+            IQueryable<Tentity> query = _Dbset;
+            foreach (var include in includeProperties)
+            {
+                query = _Dbset.Include(include);
+            }
             if (predicate == null)
             {
-                return _Dbset.AsQueryable();
+                return query ==null ?_Dbset.AsQueryable() :query.AsQueryable();
             }
-            return _dbContext.Set<Tentity>().Where(predicate).AsQueryable();
+            return query.Where(predicate).AsQueryable();
         }
-        public Tentity Get(Func<Tentity, bool> predicate = null)
+        public Tentity Get(Func<Tentity, bool> predicate = null, params Expression<Func<Tentity, object>>[] includeProperties)
         {
-            return _dbContext.Set<Tentity>().SingleOrDefault();
+            IQueryable<Tentity> query = _Dbset;
+            foreach (var include in includeProperties)
+            {
+                query = _Dbset.Include(include);
+            }
+            return query.SingleOrDefault();
         }
         public void Delete(Tentity entity)
         {
@@ -58,7 +68,9 @@ namespace PMS.DAL
             Func<IQueryable<Tentity>, IIncludableQueryable<Tentity, object>> include = null,
             bool disableTracking = false)
         {
+
             IQueryable<Tentity> query = _Dbset;
+
             if (disableTracking)
             {
                 query = query.AsNoTracking();

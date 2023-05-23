@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PMS 3 | Registration Page (v2)</title>
+  <title>PMS |Student Registration</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -27,7 +27,7 @@
     <div class="card-body">
       <p class="login-box-msg">Register a new membership</p>
 
-        @using (Html.BeginForm("Register", "Home", FormMethod.Post))
+        @using (Html.BeginForm("Register", "Student", FormMethod.Post))
         {
         <div class="input-group mb-3">
           @*<input type="Name" class="form-control" placeholder="Full name">*@
@@ -67,12 +67,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          @*<input type="College Name" class="form-control" placeholder="Retype password">*@
-          @* @Html.TextBoxFor(x=>x.DepartmentDto.CollegeDto.CollegeName,new{@class="form-control",@placeholder="College Name",@required=true})*@
-          <select asp-for="DepartmentId"   
-                      class="form-control"   
-                      asp-items="@(new SelectList(@ViewBag.ListofCountry,"ID", "Name"))">  
-                    </select>  
+          @Html.DropDownListFor(x=>x.CollegeId, Model.Collegelist, new{@class="form-control",@placeholder="College Name",@required=true} )
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -81,7 +76,7 @@
         </div>
         <div class="input-group mb-3">
           @*<input type="DeptID" class="form-control" placeholder="Retype password">*@
-           @Html.TextBoxFor(x=>x.DepartmentDto.Name,new{@class="form-control",@placeholder="Department Name",@required=true})
+            @Html.DropDownListFor(x=>x.DepartmentId, Model.Departmentlist, new{@class="form-control",@placeholder="Department Name",@required=false} )
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

@@ -14,12 +14,13 @@ namespace PMS
             services.AddScoped<ICollegeRepository, CollegeRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-
+            services.AddScoped<IPlacementDriveRepository, PlacementDriveRepository>();
             // Services
             services.AddScoped<IUserBLL, UserBLL>();
             services.AddScoped<ICollegeBLL, CollegeBLL>();
             services.AddScoped<ICompanyBLL, CompanyBLL>();
             services.AddScoped<IDepartmentBLL, DepartmentBLL>();
+            services.AddScoped<IPlacementDriveBLL, PlacementDriveBLL>();
             return services;
         }
     }

@@ -10,5 +10,6 @@ namespace PMS.BLL
          CollegeDto GetCollegeByCollegeId(int collegeID);
         bool UpdateCollege(CollegeDto collegeDto);
         bool CreateCollege(CollegeDto collegeDto);
+        bool DeleteCollege(int collegeId);
     }
 }

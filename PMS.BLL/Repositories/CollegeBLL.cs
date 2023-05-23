@@ -63,6 +63,20 @@ namespace PMS.BLL
                 return false;
             }
         }
+        public bool DeleteCollege(int collegeId)
+        {
+            try
+            {
+                var college = _collegeRepository.FirstOrDefault(x => x.CollegeId == collegeId);
+                college.Status = (byte)PMSEnums.RecordStatus.DELETE;
+                _collegeRepository.Update(college);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         public bool CreateCollege(CollegeDto collegeDto)
         {
             try

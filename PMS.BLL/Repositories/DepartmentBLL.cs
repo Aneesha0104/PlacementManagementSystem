@@ -84,6 +84,7 @@ namespace PMS.BLL
             target.Description = source.Description;
             target.CreatedOn = DateTime.Now; 
             target.Status = (byte)PMSEnums.RecordStatus.ACTIVE;
+            target.CollegeId = source.CollegeId;
             
         }
 

@@ -50,6 +50,8 @@ namespace PMS.Controllers
         {
             if (ModelState.IsValid)
             {
+                var loogedInUser =HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+                if(loogedInUser?.CollegeDto!=null) departmentDto.CollegeId = loogedInUser.CollegeDto.CollegeId;
                 _departmentBll.CreateDepartment(departmentDto);
                 return RedirectToAction("Index");
             }

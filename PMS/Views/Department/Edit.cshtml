@@ -43,6 +43,7 @@
                     @using (Html.BeginForm("Edit", "Department", FormMethod.Post))
                     {
                         @Html.HiddenFor(model => model.DepartmentId)
+                        @Html.HiddenFor(model => model.CollegeId)
                         <div class="card-body">
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Name, "Name")

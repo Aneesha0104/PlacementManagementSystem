@@ -11,7 +11,7 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Department Create</li>
+                    <li class="breadcrumb-item active">Department</li>
                 </ol>
             </div>
         </div>
@@ -23,7 +23,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
-                @if (@ViewBag.ErrorCnfMsg != null)
+                @if (ViewBag.ErrorCnfMsg != null)
                 {
                     <div class="card-body">
                         <div class="alert alert-danger alert-dismissible">
@@ -36,24 +36,25 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Create Department</h3>
+                        <h3 class="card-title">Update Department Details</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    @using (Html.BeginForm("Create", "Department", FormMethod.Post))
+                    @using (Html.BeginForm("Edit", "Department", FormMethod.Post))
                     {
+                        @Html.HiddenFor(model => model.DepartmentId)
                         <div class="card-body">
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Name, "Name")
                                 @Html.TextBoxFor(x => x.Name, new { @class = "form-control",@placeholder="Name",@required=true })
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Description, "Address")
+                                @Html.LabelFor(model => model.Description, "Description")
                                 @Html.TextAreaFor(x => x.Description, new { @class = "form-control",@placeholder="Description" })
                             </div>
-                           
+                            
+  
                         </div>
-
                         <!-- /.card-body -->
 
                         <div class="card-footer">

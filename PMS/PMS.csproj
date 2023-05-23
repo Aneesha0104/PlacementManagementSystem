@@ -35,6 +35,7 @@
 
   <ItemGroup>
     <Content Remove="Views\Create.cshtml" />
+    <Content Remove="Views\Department\Createcshtml.cshtml" />
     <Content Remove="Views\Home\College.cshtml" />
     <Content Remove="Views\Home\Company.cshtml" />
     <Content Remove="Views\Home\PlacedStudents.cshtml" />

@@ -52,5 +52,10 @@ namespace PMS.Controllers
             ViewBag.ErrorCnfMsg = ModelState["UserDto.ConfirmPassowrd"]?.Errors[0].ErrorMessage;
             return View();
         }
+        public IActionResult Delete(int id)
+        {
+            _collegeBll.DeleteCollege(id);
+            return RedirectToAction("Index");
+        }
     }
 }

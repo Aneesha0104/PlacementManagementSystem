@@ -20,6 +20,7 @@ namespace PMS.Controllers
             _userBLL = userBLL;
             _collegeBLL = collegeBLL;
             _companyBLL= companyBLL;
+            
         }
 
         public IActionResult Index()

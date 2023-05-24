@@ -1,4 +1,4 @@
-﻿@model PMS.BOL.DepartmentDto
+﻿@model PMS.BOL.PlacementDriveDto
 @{
 }
 <!-- Content Header (Page header) -->
@@ -6,12 +6,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Department</h1>
+                <h1>College</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Department</li>
+                    <li class="breadcrumb-item active">PLacementDrive</li>
                 </ol>
             </div>
         </div>
@@ -36,25 +36,34 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Update Department Details</h3>
+                        <h3 class="card-title">Update Placement Drive Details</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    @using (Html.BeginForm("Edit", "Department", FormMethod.Post))
+                    @using (Html.BeginForm("Edit", "PlacementDrive", FormMethod.Post))
                     {
-                        @Html.HiddenFor(model => model.DepartmentId)
-                        @Html.HiddenFor(model => model.CollegeId)
+                        @Html.HiddenFor(model => model.PlacementDriveId)
                         <div class="card-body">
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Name, "Name")
-                                @Html.TextBoxFor(x => x.Name, new { @class = "form-control",@placeholder="Name",@required=true })
+                                @Html.LabelFor(model => model.InterviewDate, "InterviewDate")
+                                @Html.TextBoxFor(x => x.InterviewDate, new { @class = "form-control",@placeholder="Interview Date",@required=true })
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Description, "Description")
-                                @Html.TextAreaFor(x => x.Description, new { @class = "form-control",@placeholder="Description" })
+                                @Html.LabelFor(model => model.NoOfVacancies, "NoOfVacancies")
+                                @Html.TextAreaFor(x => x.NoOfVacancies, new { @class = "form-control",@placeholder="No of Vacancies" })
                             </div>
-                            
-  
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Package, "Package")
+                                @Html.TextBoxFor(x => x.Package, new { @class = "form-control",@placeholder="Package" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Title, "Title")
+                                @Html.TextBoxFor(x => x.Title, new { @class = "form-control",@placeholder="Title" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Details, "Details")
+                                @Html.TextBoxFor(x => x.Details, new { @class = "form-control",@placeholder="Details" })
+                            </div>
                         </div>
                         <!-- /.card-body -->
 

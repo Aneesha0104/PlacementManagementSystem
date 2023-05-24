@@ -19,10 +19,6 @@ namespace PMS.BLL
             _studentRepository = studentRepository;
             _collegeRepository = collegeRepository;
         }
-        //public StudentBLL(ICollegeRepository collegeRepository)
-        //{
-        //    _collegeRepository = collegeRepository;
-        //}
         public StudentDto GetStudentByID(int Id)
         {
             StudentDto _studentDto = new StudentDto();

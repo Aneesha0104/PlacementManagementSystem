@@ -14,13 +14,12 @@ namespace PMS.Controllers
         IUserBLL _userBLL;
         ICollegeBLL _collegeBLL;
         ICompanyBLL _companyBLL;
-        public HomeController(ILogger<HomeController> logger, IUserBLL userBLL,ICollegeBLL collegeBLL,ICompanyBLL companyBLL)
+        public HomeController(ILogger<HomeController> logger, IUserBLL userBLL,ICollegeBLL collegeBLL,ICompanyBLL companyBLL, IStudentBLL studentBLL)
         {
             _logger = logger;
             _userBLL = userBLL;
             _collegeBLL = collegeBLL;
             _companyBLL= companyBLL;
-            
         }
 
         public IActionResult Index()
@@ -86,30 +85,7 @@ namespace PMS.Controllers
                 }
             }
             return RedirectToAction("Index", "Home");
-        }
-        [HttpPost]
-        public IActionResult Register(UserDto userDto)
-        {
-            if (ModelState.IsValid && userDto != null)
-            {               
-                if (_userBLL.CheckUserAlreadyRegistered(userDto))
-                {
-                    ViewBag.ErrorMsg = "Account is already registered. Try with a different Username";
-                    return View();
-                }
-
-                userDto.Usertype = (byte)PMSEnums.UserType.STUDENT;
-                userDto.CreatedOn = DateTime.Now;
-                userDto.Status = (byte)PMSEnums.RecordStatus.ACTIVE;
-                _userBLL.CreateStudent(userDto);
-
-                Login(userDto);
-
-                return RedirectToAction("Index", "Home");
-            }
-            ViewBag.ErrorMsg = "Confirm  Password doesn't match, Try again!";
-            return View();
-        }
+        }        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

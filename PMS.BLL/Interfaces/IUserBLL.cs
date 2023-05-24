@@ -12,6 +12,5 @@ namespace PMS.BLL
         UserDto GetUserByID(int id);
         UserDto GetUserByCredentials(UserDto userDto);
         public bool CheckUserAlreadyRegistered(UserDto userDto);
-        void CreateStudent(UserDto userDto);
     }
 }

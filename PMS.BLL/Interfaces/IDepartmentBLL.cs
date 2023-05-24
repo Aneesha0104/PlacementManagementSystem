@@ -11,6 +11,7 @@ namespace PMS.BLL
 
         bool UpdateDepartment(DepartmentDto departmentDto);
         bool CreateDepartment(DepartmentDto departmentDto);
+        public List<DepartmentDto> GetDepartmentunderCollege(int CollegeID);
 
     }
 }

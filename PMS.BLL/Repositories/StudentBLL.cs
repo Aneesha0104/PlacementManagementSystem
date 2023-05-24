@@ -62,7 +62,7 @@ namespace PMS.BLL
                 target.User.Status = (byte)PMSEnums.RecordStatus.ACTIVE;
 
             }
-            target.DepartmentId = 5;
+            target.DepartmentId = source.DepartmentId;
 
         }
         void CopyToDto(Student source, StudentDto target)

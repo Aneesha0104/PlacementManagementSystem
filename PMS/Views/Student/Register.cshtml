@@ -67,7 +67,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          @Html.DropDownListFor(x=>x.CollegeId, Model.Collegelist, new{@class="form-control",@placeholder="College Name",@required=true} )
+          @Html.DropDownListFor(x=>x.CollegeId, Model.Collegelist, new{@class="form-control",@placeholder="College Name",@required=true, @id ="collegeBox"} )
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -76,7 +76,7 @@
         </div>
         <div class="input-group mb-3">
           @*<input type="DeptID" class="form-control" placeholder="Retype password">*@
-            @Html.DropDownListFor(x=>x.DepartmentId, Model.Departmentlist, new{@class="form-control",@placeholder="Department Name",@required=false} )
+            @Html.DropDownListFor(x=>x.DepartmentId, Model.Departmentlist, new{@class="form-control",@placeholder="Department Name",@required=false, @id ="deptmntBox"} )
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -115,7 +115,7 @@
         </a>
       </div>*@
 
-      <a href="login" class="text-center">I already have a membership</a>
+      <a href="@Url.ActionLink("Login","Home")"  class="text-center">I already have a membership</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
@@ -128,6 +128,39 @@
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        getSubCategoryListByCategoryId();
+    })
+
+    $("#collegeBox").change(function () {
+        getSubCategoryListByCategoryId();
+    });
+
+    var getSubCategoryListByCategoryId = function () {
+         $.ajax({
+            url: '@Url.Action("GetDepartments","Student")',
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                "id":$('#collegeBox').val(),
+            },
+            success: function (data) {
+                $('#deptmntBox').find('option').remove()
+                $(data).each(
+                    function (index, item) {
+                        $('#deptmntBox').append('<option value="' + item.value + '">' + item.text + '</option>')
+                    });
+            },
+            error: function (a,b,c) {
+
+            }
+           });
+    }
+   
+</script>
+
 </body>
 </html>
-

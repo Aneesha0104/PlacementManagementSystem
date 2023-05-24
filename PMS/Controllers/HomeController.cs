@@ -14,14 +14,12 @@ namespace PMS.Controllers
         IUserBLL _userBLL;
         ICollegeBLL _collegeBLL;
         ICompanyBLL _companyBLL;
-        IStudentBLL _studentBLL;
         public HomeController(ILogger<HomeController> logger, IUserBLL userBLL,ICollegeBLL collegeBLL,ICompanyBLL companyBLL, IStudentBLL studentBLL)
         {
             _logger = logger;
             _userBLL = userBLL;
             _collegeBLL = collegeBLL;
             _companyBLL= companyBLL;
-            _studentBLL = studentBLL;
         }
 
         public IActionResult Index()
@@ -87,35 +85,7 @@ namespace PMS.Controllers
                 }
             }
             return RedirectToAction("Index", "Home");
-        }
-        [HttpPost]
-        public IActionResult Register(StudentDto studentDto)
-        {
-            if (ModelState.IsValid && studentDto != null)
-            {               
-                if (_userBLL.CheckUserAlreadyRegistered(studentDto.UserDto))
-                {
-                    ViewBag.ErrorMsg = "Account is already registered. Try with a different Username";
-                    return View();
-                }
-
-                studentDto.UserDto.Usertype = (byte)PMSEnums.UserType.STUDENT;
-                studentDto.UserDto.CreatedOn = DateTime.Now;
-                studentDto.UserDto.Status = (byte)PMSEnums.RecordStatus.ACTIVE;
-                studentDto.CreatedOn = DateTime.Now;
-                studentDto.Status = (byte)PMSEnums.RecordStatus.ACTIVE;
-                studentDto.DepartmentDto.CollegeDto.CreatedOn = DateTime.Now;
-                studentDto.DepartmentDto.CollegeDto.Status = (byte)PMSEnums.RecordStatus.ACTIVE;
-                studentDto.DepartmentDto.CreatedOn = DateTime.Now;
-                studentDto.DepartmentDto.Status = (byte)PMSEnums.RecordStatus.ACTIVE;
-                _studentBLL.CreateStudent(studentDto);
-
-                Login(studentDto.UserDto);
-
-                return RedirectToAction("Index", "Home");
-            }
-            return View();
-        }
+        }        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

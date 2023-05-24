@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "PlacedStudents";
+﻿@model IEnumerable<PMS.BOL.PlacementDriveDto>;
+@{
+    ViewBag.Title = "PlacementDrive";
 }
 <!-- Content Wrapper. Contains page content -->
 <div>
@@ -8,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Placed Students List</h1>
+                    <h1>College</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Placed Students</li>
+                        <li class="breadcrumb-item active">PlacementDrive</li>
                     </ol>
                 </div>
             </div>
@@ -26,34 +27,35 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-
+                        <p class="float-right">
+                            <a href="@Url.Action("Create")" class="btn btn-info"><i class="fa fa-plus"></i> Add PlacementDrive<a>
+                        </p>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="dynamic-table" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>StudentID</th>
-                                        <th>Name</th>
-                                        <th>Course</th>
-                                        <th>Company</th>
-                                        <th>Company Location</th>
-                                        <th>ContactNo</th>
-                                        <th>EmailID</th>
-                                        <th>ContactNo of Company</th>
+                                        <th>InterviewDate</th>
+                                        <th>No of Vacancies</th>
+                                        <th>Package</th>
+                                        <th>Title</th>
+                                        <th>Details</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>@item.Name</td>
-                                            <td>@item.Branches</td>
-                                            <td>@item.Address</td>
-                                            <td>@item.Location</td>
-                                            <td>@item.Website</td>
-                                            <td>@item.ContactNo</td>
-                                            <td>@item.EmailId</td>
-                                            <td> @item.UserDto.Username</td>
+                                            <td>@item.InterviewDate</td>
+                                            <td>@item.NoOfVacancies</td>
+                                            <td>@item.Package</td>
+                                            <td>@item.Title</td>
+                                            <td>@item.Details</td>
+                                           
+                                            <td class="project-actions text-right">
+                                                <a class="btn btn-info btn-sm" href="@Url.Action("Edit","PlacementDrive",new { id = @item.PlacementDriveId })"><i class="fas fa-pencil-alt">  </i> Edit </a>
+                                                <a class="btn btn-danger btn-sm" href="@Url.Action("Delete","PlacememtDrive",new { id = @item.PlacementDriveId })"><i class="fas fa-trash"> </i>Delete</a>
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>

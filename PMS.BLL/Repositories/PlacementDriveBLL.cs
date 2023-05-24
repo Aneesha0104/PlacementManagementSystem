@@ -114,9 +114,7 @@ namespace PMS.BLL
             target.Place = source.Place;
             target.Title = source.Title;
             target.Details = source.Details;
-            target.Status = (byte)PMSEnums.RecordStatus.ACTIVE;
-
-
+            target.Status = (byte)PMSEnums.RecordStatus.ACTIVE;           
         }
         void CopyToDto(PlacementDrive source, PlacementDriveDto target)
         {
@@ -130,8 +128,7 @@ namespace PMS.BLL
             target.Status = source.Status;
             target.PlacementDriveId = source.PlacementDriveId;
             target.CollegeId = source.CollegeId;
-            target.CompanyId = source.CompanyId;
-
+            target.CompanyId = source.CompanyId;            
         }
         #endregion
     }

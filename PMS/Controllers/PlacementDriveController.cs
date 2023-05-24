@@ -1,16 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PMS.BLL;
 using PMS.BOL;
+using PMS.DAL.Models;
 
 namespace PMS.Controllers
 {
     public class PlacementDriveController : Controller
     {
         IPlacementDriveBLL _placementDriveBll;
+        ICollegeBLL _collegeBll;
 
-        public PlacementDriveController(IPlacementDriveBLL placementDriveBll)
+        public PlacementDriveController(IPlacementDriveBLL placementDriveBll,ICollegeBLL collegeBLL)
         {
             _placementDriveBll = placementDriveBll;
+            _collegeBll = collegeBLL;
         }
 
         public IActionResult Index()
@@ -20,7 +24,7 @@ namespace PMS.Controllers
         }
         public IActionResult Edit(int id)
         {
-            ViewBag.ErrorCnfMsg = null;
+            ViewBag.collegeList = new SelectList(_collegeBll.GetAllCollegeBll(), "CollegeId", "CollegeName");
             var placementdrive = _placementDriveBll.GetPlacementDriveByPlacementDriveId(id);
             return View(placementdrive);
         }
@@ -29,6 +33,9 @@ namespace PMS.Controllers
         {
             if(ModelState.IsValid)
             {
+                //var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+                
+
                 _placementDriveBll.UpdatePlacementDrive(placementdriveDto);
                 return RedirectToAction("Index");
 
@@ -39,7 +46,7 @@ namespace PMS.Controllers
         }
         public IActionResult Create()
         {
-            ViewBag.ErrorCnfMsg = null;
+            ViewBag.collegeList= new SelectList(_collegeBll.GetAllCollegeBll(), "CollegeId", "CollegeName");
             var placementdrive=new PlacementDriveDto();
             return View(placementdrive);
         }

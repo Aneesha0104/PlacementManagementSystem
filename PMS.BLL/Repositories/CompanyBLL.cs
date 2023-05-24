@@ -42,17 +42,68 @@ namespace PMS.BLL
             }
             return companyDtoList;
         }
+        public CompanyDto GetCompanyByCompanyId(int companyID)
+        {
+            var company = _companyRepository.FirstOrDefault(x => x.CompanyId == companyID, include: x => x.Include(y => y.User));
+            var companyDto = new CompanyDto();
+            if (company != null) CopyToDto(company, companyDto);
+            return companyDto;
+        }
+        public bool UpdateCompany(CompanyDto companyDto)
+        {
+            try
+            {
+                var company = _companyRepository.FirstOrDefault(x => x.CompanyId == companyDto.CompanyId, include: x => x.Include(y => y.User));
+                CopyFromDto(companyDto, company);
+                _companyRepository.Update(company);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public bool DeleteCompany(int companyId)
+        {
+            try
+            {
+                var company = _companyRepository.FirstOrDefault(x => x.CompanyId == companyId);
+                company.Status = (byte)PMSEnums.RecordStatus.DELETE;
+                _companyRepository.Update(company);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public bool CreateCompany(CompanyDto companyDto)
+        {
+            try
+            {
+                var company = new Company();
+                CopyFromDto(companyDto, company);
+                _companyRepository.Insert(company);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         #region Copy 
         void CopyFromDto(CompanyDto source, Company target)
         {
-            target.Name = source.Name;
-            target.Website = source.Website;
+            target.Name = source.Name;           
             target.Branches = source.Branches;
             target.Remarks = source.Remarks;
             target.Location = source.Location;  
-            target.Address = source.Address;
+            target.Address = source.Address;            
+            target.ContactNo = source.ContactNo;
+            target.Website = source.Website;
+            target.EmailId = source.EmailId;
             target.CreatedOn = DateTime.Now;
-            target.Status = source.Status;
+            target.Status = (byte)PMSEnums.RecordStatus.ACTIVE;
             target.UserId= source.UserId;
             if(source.UserDto !=null)
             {
@@ -65,13 +116,15 @@ namespace PMS.BLL
         }
         void CopyToDto(Company source, CompanyDto target)
         {
-            target.Name = source.Name;
-            target.Website = source.Website;
+            target.Name = source.Name;         
             target.CompanyId = source.CompanyId;
             target.Branches = source.Branches;
             target.Remarks = source.Remarks;
             target.Location = source.Location;
-            target.Address = source.Address;
+            target.Address = source.Address;            
+            target.ContactNo = source.ContactNo;
+            target.Website = source.Website;
+            target.EmailId = source.EmailId;
             target.CreatedOn = source.CreatedOn;
             target.Status = source.Status;
             target.UserId = source.UserId;

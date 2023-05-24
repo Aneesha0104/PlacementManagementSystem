@@ -8,5 +8,9 @@ namespace PMS.BLL
     {
         CompanyDto GetCompanyByUserId(int userId);
         List<CompanyDto> GetAllCompanyBll();
+        CompanyDto GetCompanyByCompanyId(int companyID);
+        bool UpdateCompany(CompanyDto companyDto);
+        bool CreateCompany(CompanyDto companyDto);
+        bool DeleteCompany(int companyid);
     }
 }

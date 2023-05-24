@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>College List</h1>
+                    <h1>Company List</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -27,14 +27,15 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-
+                        <p class="float-right">
+                            <a href="@Url.Action("Create")" class="btn btn-info"><i class="fa fa-plus"></i>Add Company<a>
+                        </p>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="dynamic-table" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Branches</th>
+                                        <th>Name</th>                                        
                                         <th>Address</th>
                                         <th>Location</th>
                                         <th>Website</th>
@@ -47,14 +48,17 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>@item.Name</td>
-                                            <td>@item.Branches</td>
+                                            <td>@item.Name</td>                                           
                                             <td>@item.Address</td>
                                             <td>@item.Location</td>
                                             <td>@item.Website</td>
                                             <td>@item.ContactNo</td>
                                             <td>@item.EmailId</td>
                                             <td> @item.UserDto.Username</td>
+                                             <td class="project-actions text-right">
+                                                <a class="btn btn-info btn-sm" href="@Url.Action("Edit","Company",new { id = @item.CompanyId })"><i class="fas fa-pencil-alt">  </i> Edit </a>
+                                                <a class="btn btn-danger btn-sm" href="@Url.Action("Delete","Company",new { id = @item.CompanyId })"><i class="fas fa-trash"> </i>Delete</a>
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>

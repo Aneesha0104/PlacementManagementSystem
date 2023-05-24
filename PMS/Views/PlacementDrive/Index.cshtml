@@ -36,8 +36,10 @@
                                 <thead>
                                     <tr>
                                         <th>InterviewDate</th>
+                                        <th>CollegeId</th>
                                         <th>No of Vacancies</th>
                                         <th>Package</th>
+                                        <th>Place</th>
                                         <th>Title</th>
                                         <th>Details</th>
                                     </tr>
@@ -47,8 +49,10 @@
                                     {
                                         <tr>
                                             <td>@item.InterviewDate</td>
+                                            <td>@item.CollegeDto?.CollegeName</td>
                                             <td>@item.NoOfVacancies</td>
                                             <td>@item.Package</td>
+                                            <td>@item.Place</td>
                                             <td>@item.Title</td>
                                             <td>@item.Details</td>
                                            

@@ -46,7 +46,21 @@ namespace PMS.BLL
             return departmenttDto;
 
         }
-
+        public List<DepartmentDto> GetDepartmentunderCollege(int CollegeID)
+        {
+            var department = _departmentRepository.GetAll(x => x.CollegeId == CollegeID);
+            var departmentDtoList = new List<DepartmentDto>();
+            if (department!= null)
+            {
+                foreach (var dep in department)
+                {
+                    var departmentDto = new DepartmentDto();
+                    CopyToDto(dep, departmentDto);
+                    departmentDtoList.Add(departmentDto);
+                }                            
+            }
+            return departmentDtoList;
+        }
         public bool UpdateDepartment(DepartmentDto departmentDto)
         {
             try
@@ -62,7 +76,7 @@ namespace PMS.BLL
                 return false;
             }
         }
-         
+
         public bool CreateDepartment(DepartmentDto departmentDto)
         {
             try
@@ -78,26 +92,26 @@ namespace PMS.BLL
             }
         }
 
-        void CopyFromDto(DepartmentDto source,Department target)
+        void CopyFromDto(DepartmentDto source, Department target)
         {
             target.Name = source.Name;
             target.Description = source.Description;
-            target.CreatedOn = DateTime.Now; 
+            target.CreatedOn = DateTime.Now;
             target.Status = (byte)PMSEnums.RecordStatus.ACTIVE;
             target.CollegeId = source.CollegeId;
             
         }
 
-        void CopyToDto(Department source,DepartmentDto target)
+        void CopyToDto(Department source, DepartmentDto target)
         {
             target.Name = source.Name;
             target.Description = source.Description;
             target.CreatedOn = source.CreatedOn;
-            target.Status = source.Status;  
-            target.CollegeId= source.CollegeId;
+            target.Status = source.Status;
+            target.CollegeId = source.CollegeId;
             target.DepartmentId = source.DepartmentId;
 
-           
+
 
         }
 

@@ -24,7 +24,7 @@ namespace PMS.BLL
         {
             var company = _companyRepository.FirstOrDefault(x => x.UserId == userId);
             var companyDto=new CompanyDto();
-            if (company == null) CopyToDto(company, companyDto);
+            if (company != null) CopyToDto(company, companyDto);
             return companyDto;
         }
         public List<CompanyDto> GetAllCompanyBll()

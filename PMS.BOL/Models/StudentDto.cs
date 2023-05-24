@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace PMS.BOL
 {
@@ -38,6 +40,8 @@ namespace PMS.BOL
 
         public int DepartmentId { get; set; }
 
+        public int CollegeId { get; set; }
+
         public int AcademicDetailId { get; set; }
 
         public string AcademicYear { get; set; }
@@ -57,5 +61,7 @@ namespace PMS.BOL
         public virtual DepartmentDto DepartmentDto { get; set; }
 
         public virtual UserDto UserDto { get; set; }
+        public IEnumerable<SelectListItem> Collegelist { get; set; }
+        public IEnumerable<SelectListItem> Departmentlist { get; set; }
     }
 }

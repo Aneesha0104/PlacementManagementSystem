@@ -13,6 +13,7 @@ namespace PMS
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICollegeRepository, CollegeRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IPlacementDriveRepository, PlacementDriveRepository>();
             // Services
@@ -20,6 +21,7 @@ namespace PMS
             services.AddScoped<ICollegeBLL, CollegeBLL>();
             services.AddScoped<ICompanyBLL, CompanyBLL>();
             services.AddScoped<IDepartmentBLL, DepartmentBLL>();
+            services.AddScoped<IStudentBLL, StudentBLL>();  
             services.AddScoped<IPlacementDriveBLL, PlacementDriveBLL>();
             return services;
         }

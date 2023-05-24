@@ -34,15 +34,8 @@ namespace PMS.BLL
         }
         public bool CheckUserAlreadyRegistered(UserDto userDto)
         {
-            var _userDto = new UserDto();
             var user = _userRepository.FirstOrDefault(x => x.Username == userDto.Username );
             return user != null;
-        }
-        public void CreateStudent(UserDto student)
-        {
-            var user = new User();
-            CopyFromDto(student, user);
-            _userRepository.Insert(user);
         }
         #region Copy 
         void CopyFromDto(UserDto source, User target)

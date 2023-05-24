@@ -13,7 +13,8 @@ namespace PMS
 
             // If the variable does not exist, redirect the user to the login page
             if (!isAuthenticated && ((Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor)filterContext.ActionDescriptor).ActionName != "Login" 
-                && ((Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor)filterContext.ActionDescriptor).ActionName != "Register")
+                && ((Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor)filterContext.ActionDescriptor).ActionName != "Register"
+                 && ((Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor)filterContext.ActionDescriptor).ActionName != "GetDepartments")
             {
 
                 filterContext.Result =new RedirectToRouteResult(new RouteValueDictionary(new { action = "Login", controller = "Home" }));

@@ -24,8 +24,8 @@ namespace PMS.Controllers
         }
         public IActionResult Edit(int id)
         {
-            ViewBag.collegeList = new SelectList(_collegeBll.GetAllCollegeBll(), "CollegeId", "CollegeName");
             var placementdrive = _placementDriveBll.GetPlacementDriveByPlacementDriveId(id);
+            ViewBag.collegeList = new SelectList(_collegeBll.GetAllCollegeBll(), "CollegeId", "CollegeName", placementdrive.CollegeId);
             return View(placementdrive);
         }
         [HttpPost]

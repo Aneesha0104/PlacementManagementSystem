@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PMS.BLL;
 using PMS.BOL;
+using PMS.DAL.Models;
 
 namespace PMS.Controllers
 {
@@ -20,6 +21,17 @@ namespace PMS.Controllers
         {
             return View();
         }
+
+        public IActionResult StudentList(int collegeId)
+        {
+            var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");           
+            var studentList = _studentBLL.GetAllStudentByCollegeId(loogedInUser.CollegeDto.CollegeId);
+
+           // if (loogedInUser?.ColDto != null) Department.CollegeId = loogedInUser.CollegeDto.CollegeId;
+            return View(studentList);
+        }
+
+       
         public ActionResult Register()
         {
             var studentDto = _studentBLL.GetCollegeDepartmentDetails();

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Org.BouncyCastle.Math.EC.Rfc7748;
 using PMS.BOL;
 using PMS.DAL;
 using PMS.DAL.Models;
@@ -42,6 +43,30 @@ namespace PMS.BLL
             return _studentDto;
         }
 
+        public List<StudentDto> GetAllStudentByCollegeId(int collegeId)
+        {
+            
+            var student = _studentRepository.GetAll(x => x.Department.CollegeId == collegeId,x=>x.Department);
+            //var student = _studentRepository.GetAll(x => x.Department != null && x.Department.CollegeId == collegeId);
+            var studentDtoList = new List<StudentDto>();
+            if(student!=null)
+            {
+                foreach(var item in student)
+                {
+                    var studentDto = new StudentDto();
+                    CopyToDto(item, studentDto);
+                    studentDtoList.Add(studentDto);
+
+                }
+            }
+            return studentDtoList;
+
+        }
+
+       
+
+
+
         #region copy
         void CopyFromDto(StudentDto source, Student target)
         {
@@ -67,24 +92,25 @@ namespace PMS.BLL
             target.RegisterNo = source?.RegisterNo;
             target.Name = source.Name;
             target.Gender = source?.Gender;
-            target.Dob = (DateTime)source.Dob;
+            target.Dob = source.Dob;
             target.MobileNo = source.MobileNo;
             target.EmailId = source.EmailId;
             target.Address = source.Address;
             target.District = source.District;
             target.State = source.State;
-            target.Pin = (decimal)source.Pin;
+            target.Pin = source.Pin;
             target.NameOfGuardian = source.NameOfGuardian;
             target.Occupation = source.Occupation;
             target.MaritalStatus = source.MaritalStatus;
             target.Mothertongue = source.Mothertongue;
             target.UserId = source.UserId;
             target.DepartmentId = source.DepartmentId;
-            target.AcademicDetailId = (int)source.AcademicDetailId;
+            target.AcademicDetailId = source.AcademicDetailId;
             target.AcademicYear = source.AcademicYear;
             target.Remarks = source.Remarks;
             target.Hobbies = source.Hobbies;
             target.Skills = source.Skills;
+            
         }
     }
     #endregion

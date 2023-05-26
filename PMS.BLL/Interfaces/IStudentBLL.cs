@@ -12,5 +12,6 @@ namespace PMS.BLL
         public StudentDto GetStudentByID(int Id);
         public void CreateStudent(StudentDto student);
         public StudentDto GetCollegeDepartmentDetails();
+        List<StudentDto> GetAllStudentByCollegeId(int collegeId);
     }
 }

@@ -14,7 +14,7 @@ namespace PMS.BOL
 
         public string Gender { get; set; }
 
-        public DateTime Dob { get; set; }
+        public DateTime? Dob { get; set; }
 
         public string MobileNo { get; set; }
 
@@ -26,7 +26,7 @@ namespace PMS.BOL
 
         public string State { get; set; }
 
-        public decimal Pin { get; set; }
+        public decimal? Pin { get; set; }
 
         public string NameOfGuardian { get; set; }
 
@@ -42,7 +42,7 @@ namespace PMS.BOL
 
         public int CollegeId { get; set; }
 
-        public int AcademicDetailId { get; set; }
+        public int? AcademicDetailId { get; set; }
 
         public string AcademicYear { get; set; }
 

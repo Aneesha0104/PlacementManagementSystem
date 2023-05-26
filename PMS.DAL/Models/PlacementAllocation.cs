@@ -15,6 +15,7 @@ public partial class PlacementAllocation
 
     public string Rating { get; set; }
 
+
     /// <summary>
     /// Scheduled, Passed , Failed
     /// </summary>

@@ -131,6 +131,8 @@ namespace PMS.BLL
             target.PlacementDriveId = source.PlacementDriveId;
             target.CollegeId = source.CollegeId;
             target.CompanyId = source.CompanyId;
+            target.CollegeDto = new CollegeDto();
+            target.CollegeDto.CollegeName = source.College?.CollegeName;
         }
         #endregion
     }

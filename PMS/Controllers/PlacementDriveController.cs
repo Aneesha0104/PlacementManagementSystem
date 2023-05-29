@@ -10,11 +10,13 @@ namespace PMS.Controllers
     {
         IPlacementDriveBLL _placementDriveBll;
         ICollegeBLL _collegeBll;
+        ICompanyBLL _companyBll;
 
-        public PlacementDriveController(IPlacementDriveBLL placementDriveBll,ICollegeBLL collegeBLL)
+        public PlacementDriveController(IPlacementDriveBLL placementDriveBll,ICollegeBLL collegeBLL,ICompanyBLL companyBLL)
         {
             _placementDriveBll = placementDriveBll;
             _collegeBll = collegeBLL;
+            _companyBll = companyBLL;
         }
 
         public IActionResult Index()
@@ -65,6 +67,11 @@ namespace PMS.Controllers
             return View();
         }
 
+        public IActionResult PlacementDriveList()
+        {
+            var placementDriveList = _placementDriveBll.GetAllPlacementDrivebll();
+            return View("PlacementDriveList",placementDriveList);
+        }
 
     }
 

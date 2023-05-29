@@ -20,10 +20,10 @@ namespace PMS.DAL
         }
         public IEnumerable<Tentity> GetAll(Func<Tentity, bool> predicate = null, params Expression<Func<Tentity, object>>[] includeProperties)
         {
-            IQueryable<Tentity> query = _Dbset;
+            IQueryable<Tentity> query = _Dbset.AsQueryable();
             foreach (var include in includeProperties)
             {
-                query = _Dbset.Include(include);
+                query=query.Include(include);
             }
             if (predicate == null)
             {

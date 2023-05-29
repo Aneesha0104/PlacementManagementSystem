@@ -7,9 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using MimeKit.Encodings;
-using System.ComponentModel.Design;
-using Org.BouncyCastle.Math.EC.Rfc7748;
+
 
 namespace PMS.BLL
 {
@@ -42,7 +40,7 @@ namespace PMS.BLL
 
         public List<PlacementDriveDto> GetAllPlacementDrivebll()
         {
-            var placementdrive = _placementDriveRepository.GetAll(x => x.Status == (byte)PMSEnums.RecordStatus.ACTIVE, x => x.Company, x => x.College);
+            var placementdrive = _placementDriveRepository.GetAll(x => x.Status == (byte)PMSEnums.RecordStatus.ACTIVE, x => x.College,x => x.Company);
             var placementdriveDtoList = new List<PlacementDriveDto>();
             if (placementdrive != null) { }
             {
@@ -132,7 +130,13 @@ namespace PMS.BLL
             target.CollegeId = source.CollegeId;
             target.CompanyId = source.CompanyId;
             target.CollegeDto = new CollegeDto();
-            target.CollegeDto.CollegeName = source.College?.CollegeName;
+            target.CollegeDto.CollegeName = source.College.CollegeName;
+            target.CompanyDto = new CompanyDto();
+            if (source.Company != null)
+            {
+                target.CompanyDto.Name = source.Company.Name;
+            }
+
         }
         #endregion
     }

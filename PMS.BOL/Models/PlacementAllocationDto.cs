@@ -15,8 +15,8 @@ namespace PMS.BOL
         public string Rating { get; set; }
 
         public byte PlacementStatus { get; set; }
-        public StudentDto Student { get; set; }
-        public PlacementDriveDto PlacementDrive { get; set; }
+        public StudentDto StudentDto { get; set; }
+        public PlacementDriveDto PlacementDriveDto { get; set; }
 
     }
 }

@@ -16,6 +16,7 @@ namespace PMS
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IPlacementDriveRepository, PlacementDriveRepository>();
+            services.AddScoped<IPlacementAllocationRepository, PlacementAllocationRepository>();
             // Services
             services.AddScoped<IUserBLL, UserBLL>();
             services.AddScoped<ICollegeBLL, CollegeBLL>();
@@ -23,6 +24,7 @@ namespace PMS
             services.AddScoped<IDepartmentBLL, DepartmentBLL>();
             services.AddScoped<IStudentBLL, StudentBLL>();  
             services.AddScoped<IPlacementDriveBLL, PlacementDriveBLL>();
+            services.AddScoped<IPlacementAllocationBLL, PlacementAllocationBLL>();
             return services;
         }
     }

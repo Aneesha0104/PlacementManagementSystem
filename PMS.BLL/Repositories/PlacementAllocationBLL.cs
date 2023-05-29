@@ -75,6 +75,11 @@ namespace PMS.BLL
             target.PlacementStatus = source.PlacementStatus;
             target.StudentId= source.StudentId;
             target.CommentId= source.CommentId;
+            target.StudentDto = new StudentDto();
+            target.StudentDto.Name = source.Student?.Name;
+            target.PlacementDriveDto = new PlacementDriveDto();
+            target.PlacementDriveDto.CompanyDto.Name = source.PlacementDrive.Company.Name;
+
             
         }
 

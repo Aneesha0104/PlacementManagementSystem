@@ -55,6 +55,7 @@ namespace PMS.BOL
         public string Skills { get; set; }
 
         public byte Status { get; set; }
+        public bool AllocateToDrive { get; set; }
 
         public virtual AcademicDetailDto AcademicDetailDto { get; set; }
 

@@ -26,5 +26,11 @@ namespace PMS.Controllers
             var placementAllocationList = _placementAllocationBLL.GetAllPlacementAllocationbll();
             return View("PlacementAllocationList", placementAllocationList);
         }
+        [HttpPost]
+        public IActionResult Allocate(List<StudentDto> studentDtoList)
+        {
+           var pId =  HttpContext.Session.GetInt32("placementDriveId");
+            return View("Index");
+        }
     }
 }

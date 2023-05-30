@@ -31,7 +31,17 @@ namespace PMS.Controllers
             return View(studentList);
         }
 
-       
+        public IActionResult AllocationList(int id)
+        {
+            HttpContext.Session.SetInt32("placementDriveId", id);
+           var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+            var allocationList = _studentBLL.GetAllStudentByCollegeId(loogedInUser.CollegeDto.CollegeId);
+
+            
+            return View(allocationList);
+        }
+
+
         public ActionResult Register()
         {
             var studentDto = _studentBLL.GetCollegeDepartmentDetails();

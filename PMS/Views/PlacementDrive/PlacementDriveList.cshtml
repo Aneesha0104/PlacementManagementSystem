@@ -53,7 +53,7 @@
                                             <td>@item.Place</td>
                                             <td>@item.Details</td>
                                             <td>
-                                                <a class="btn btn-primary"href="@Url.Action("AllocationList","Student",@item.PlacementDriveId)">Allocate</a>                                          
+                                                <a class="btn btn-primary"href="@Url.Action("AllocationList","Student",new { id = @item.PlacementDriveId})">Allocate</a>                                          
                                             </td>
                                            
                                             

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PMS.BOL.StudentDto>;
+﻿@model List<PMS.BOL.StudentDto>;
 @{
     ViewBag.Title = "AllocationList";
 }
@@ -47,25 +47,26 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach (var item in Model)
+                                            @for (int i = 0; i < Model.Count(); i++)
                                             {
                                                 <tr>
                                                     <td>
-                                                        <input id="@item.StudentId" type="checkbox" name="Allocate" value="@item.AllocateToDrive" checked="@item.AllocateToDrive" />
+                                                        @Html.CheckBoxFor(x=>x[i].AllocateToDrive)
+                                                        @Html.HiddenFor(x=>x[i].StudentId)
                                                     </td>
-                                                    <td>@item.RegisterNo</td>
-                                                    <td>@item.Name</td>
-                                                    <td>@item.Gender</td>
-                                                    <td>@item.Dob</td>
-                                                    <td>@item.MobileNo</td>
-                                                    <td>@item.EmailId</td>
+                                                    <td>@Html.DisplayFor(x=>x[i].RegisterNo)</td>
+                                                    <td>@Html.DisplayFor(x=>x[i].Name)</td>
+                                                    <td>@Html.DisplayFor(x=>x[i].Gender)</td>
+                                                    <td>@Html.DisplayFor(x=>x[i].Dob)</td>
+                                                    <td>@Html.DisplayFor(x=>x[i].MobileNo)</td>
+                                                    <td>@Html.DisplayFor(x=>x[i].EmailId)</td>
 
 
                                                 </tr>
                                             }
                                         </tbody>
                                     </table>
-
+                                     
                                 </div>
                                 <!-- /.card-body -->
                         </div>

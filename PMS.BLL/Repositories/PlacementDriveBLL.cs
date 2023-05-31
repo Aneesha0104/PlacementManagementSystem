@@ -14,6 +14,8 @@ namespace PMS.BLL
     public class PlacementDriveBLL : IPlacementDriveBLL
     {
         IPlacementDriveRepository _placementDriveRepository;
+        IPlacementAllocationRepository _placementAllocationRepository;
+        IStudentRepository _studentRepository;
 
         public PlacementDriveBLL(IPlacementDriveRepository placementDriveRepository)
         {
@@ -30,13 +32,20 @@ namespace PMS.BLL
 
 
         }
-        public PlacementDriveDto GetPlacementDriveByCollegeId(int collegeId)
-        {
-            var placementdrive = _placementDriveRepository.FirstOrDefault(x => x.CollegeId == collegeId, include: x => x.Include(Y => Y.College));
-            var placementdriveDto = new PlacementDriveDto();
-            if (placementdrive != null) CopyToDto(placementdrive, placementdriveDto);
-            return placementdriveDto;
-        }
+         public PlacementDriveDto GetPlacementDriveByCollegeId(int collegeId)
+         {
+             var placementdrive = _placementDriveRepository.FirstOrDefault(x => x.CollegeId == collegeId, include: x => x.Include(Y => Y.College));
+             var placementdriveDto = new PlacementDriveDto();
+             if (placementdrive != null) CopyToDto(placementdrive, placementdriveDto);
+             return placementdriveDto;
+         }
+
+
+ 
+
+       
+
+
 
         public List<PlacementDriveDto> GetAllPlacementDrivebll()
         {

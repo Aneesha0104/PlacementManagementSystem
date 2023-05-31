@@ -33,7 +33,17 @@ namespace PMS.BOL
             COMPANY
 
         }
+        public enum PlacementStatus : byte
+        {
 
+            [EnumTextValue("Allocated")]
+            ALLOCATED,
+            [EnumTextValue("Placed")]
+            PLACED,
+            [EnumTextValue("Rejected")]
+            REJECTED
+
+        }
 
 
         public static string GetTextValue(this Enum en)

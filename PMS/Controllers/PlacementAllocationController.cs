@@ -29,7 +29,8 @@ namespace PMS.Controllers
         [HttpPost]
         public IActionResult Allocate(List<StudentDto> studentDtoList)
         {
-           var pId =  HttpContext.Session.GetInt32("placementDriveId");
+           int? pId =  HttpContext.Session.GetInt32("placementDriveId");
+            _placementAllocationBLL.AllocatePlacementDriveToStudent(studentDtoList, pId??0);
             return RedirectToAction("PlacementDriveList", "PlacementDrive");
         }
     }

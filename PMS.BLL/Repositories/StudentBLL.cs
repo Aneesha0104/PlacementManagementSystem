@@ -55,6 +55,7 @@ namespace PMS.BLL
                 {
                     var studentDto = new StudentDto();
                     CopyToDto(item, studentDto);
+                    //studentDto.AllocateToDrive = true;
                     studentDtoList.Add(studentDto);
 
                 }

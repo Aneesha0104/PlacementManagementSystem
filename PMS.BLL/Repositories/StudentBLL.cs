@@ -83,7 +83,7 @@ namespace PMS.BLL
                     var isStudentAllocated = _placementAllocationRepository.Any(x => x.StudentId == studentDto.StudentId);
 
                     // Update the AllocateToDrive property of the studentDto
-                    studentDto.AllocateToDrive = !isStudentAllocated;
+                    studentDto.AllocateToDrive = isStudentAllocated;
 
                     studentDtoList.Add(studentDto);
                 }

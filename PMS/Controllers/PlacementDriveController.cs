@@ -18,6 +18,12 @@ namespace PMS.Controllers
             _collegeBll = collegeBLL;
             _companyBll = companyBLL;
         }
+        public IActionResult DriveList(int companyId)
+        {
+            var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+            var driveList=_placementDriveBll.GetPlacementDriveByCompanyId(loogedInUser.CompanyDto.CompanyId);
+            return View(driveList);
+        }
 
         public IActionResult Index()
         {

@@ -14,12 +14,13 @@ namespace PMS.BLL
     public class PlacementDriveBLL : IPlacementDriveBLL
     {
         IPlacementDriveRepository _placementDriveRepository;
-        IPlacementAllocationRepository _placementAllocationRepository;
-        IStudentRepository _studentRepository;
-
-        public PlacementDriveBLL(IPlacementDriveRepository placementDriveRepository)
+        ICollegeRepository _collegeRepository;
+        ICompanyRepository _companyRepository;
+        public PlacementDriveBLL(IPlacementDriveRepository placementDriveRepository,ICollegeRepository collegeRepository,ICompanyRepository companyRepository)
         {
             _placementDriveRepository = placementDriveRepository;
+            _collegeRepository = collegeRepository;
+            _companyRepository = companyRepository;
         }
 
         public PlacementDriveDto GetPlacementDriveByCompanyId(int companyId)

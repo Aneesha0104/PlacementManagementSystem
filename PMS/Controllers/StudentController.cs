@@ -24,14 +24,14 @@ namespace PMS.Controllers
 
         public IActionResult StudentList(int collegeId)
         {
-            var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");           
+            var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
             var studentList = _studentBLL.GetAllStudentByCollegeId(loogedInUser.CollegeDto.CollegeId);
 
-           // if (loogedInUser?.ColDto != null) Department.CollegeId = loogedInUser.CollegeDto.CollegeId;
+            // if (loogedInUser?.ColDto != null) Department.CollegeId = loogedInUser.CollegeDto.CollegeId;
             return View(studentList);
         }
 
-       
+
         public ActionResult Register()
         {
             var studentDto = _studentBLL.GetCollegeDepartmentDetails();
@@ -39,14 +39,14 @@ namespace PMS.Controllers
         }
         public ActionResult GetDepartments(int id)
         {
-            if(id > 0)
+            if (id > 0)
             {
 
                 StudentDto _studentDto = new StudentDto();
                 _studentDto.Departmentlist = new List<SelectListItem>();
                 _studentDto.Departmentlist = new SelectList(_departmentBLL.GetDepartmentunderCollege(id), "DepartmentId", "Name");
                 return Json(_studentDto.Departmentlist);
-            } 
+            }
             return null;
         }
         [HttpPost]
@@ -77,6 +77,19 @@ namespace PMS.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View();
+        }
+        public IActionResult Edit()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Edit(StudentDto studentDto)
+        {
+            if(studentDto != null)
+            {
+
+            }
+            return View("Student");
         }
     }
 }

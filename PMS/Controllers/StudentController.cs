@@ -41,6 +41,14 @@ namespace PMS.Controllers
             return View(allocationList);
         }
 
+        public IActionResult AllocatedStudentsList(int placementDriveId)
+        {
+           
+            var allocatedstudents = _studentBLL.GetAllStudentsByPlacementDriveId(placementDriveId);
+            return View(allocatedstudents);
+        }
+
+        
 
         public ActionResult Register()
         {

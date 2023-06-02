@@ -43,16 +43,12 @@ namespace PMS.BLL
         }
 
         public PlacementDriveDto GetPlacementDriveByCollegeId(int collegeId)
-         {
-             var placementdrive = _placementDriveRepository.FirstOrDefault(x => x.CollegeId == collegeId, include: x => x.Include(Y => Y.College));
-             var placementdriveDto = new PlacementDriveDto();
-             if (placementdrive != null) CopyToDto(placementdrive, placementdriveDto);
-             return placementdriveDto;
-         }
-
-
- 
-
+        {
+            var placementdrive = _placementDriveRepository.FirstOrDefault(x => x.CollegeId == collegeId, include: x => x.Include(Y => Y.College));
+            var placementdriveDto = new PlacementDriveDto();
+            if (placementdrive != null) CopyToDto(placementdrive, placementdriveDto);
+            return placementdriveDto;
+        }
        
 
 

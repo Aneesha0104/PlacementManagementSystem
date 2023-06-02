@@ -45,27 +45,7 @@ namespace PMS.BLL
             return _studentDto;
         }
 
-        /* public List<StudentDto> GetAllStudentByCollegeId(int collegeId)
-         {
-
-             var student = _studentRepository.GetAll(x => x.Department.CollegeId == collegeId,x=>x.Department);
-
-             var studentDtoList = new List<StudentDto>();
-             if(student!=null)
-             {
-                 foreach(var item in student)
-                 {
-                     var studentDto = new StudentDto();
-                     CopyToDto(item, studentDto);
-                     //studentDto.AllocateToDrive = true;
-                     studentDtoList.Add(studentDto);
-
-                 }
-             }
-             return studentDtoList;
-
-
-         }*/
+       
 
         public List<StudentDto> GetAllStudentByCollegeId(int collegeId)
         {
@@ -92,6 +72,26 @@ namespace PMS.BLL
             return studentDtoList;
         }
 
+        public List<StudentDto>GetAllStudentsByPlacementDriveId(int placementDriveId)
+        {
+            var students = _studentRepository.GetAll(x => x.PlacementAllocations.Any(p=>p.PlacementDriveId==placementDriveId && p.PlacementStatus==(byte)PMSEnums.PlacementStatus.ALLOCATED));
+            var studentDtoList = new List<StudentDto>();
+            if (students != null)
+            {
+                foreach (var student in students)
+                {
+                    var studentDto = new StudentDto();
+                    CopyToDto(student, studentDto);
+
+                    studentDtoList.Add(studentDto);
+                }
+            }
+
+            return studentDtoList;
+
+        }
+
+        
 
 
 

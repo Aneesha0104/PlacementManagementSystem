@@ -1,0 +1,87 @@
+﻿@model IEnumerable<PMS.BOL.PlacementDriveDto>;
+@{
+    ViewBag.Title = "PlacementDriveList";
+}
+<!-- Content Wrapper. Contains page content -->
+<div>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Placement drives</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">placement drives</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="dynamic-table" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>CompanyID</th>
+                                        <th>Company</th>
+                                        <th>Interview Date</th>
+                                        <th>Package</th>
+                                        <th>Place</th>
+                                        <th>Details</th>
+                                        <th>Allocate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.CompanyId</td>
+                                            <td>@item.CompanyDto.Name</td>
+                                            <td>@item.InterviewDate</td>
+                                            <td>@item.Package</td>
+                                            <td>@item.Place</td>
+                                            <td>@item.Details</td>
+                                            <td>
+                                                <a class="btn btn-primary"href="@Url.Action("AllocationList","Student",new { id = @item.PlacementDriveId})">Allocate</a>                                          
+                                            </td>
+                                           
+                                            
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+@section Scripts
+    {
+    <script>
+        $(function () {
+            $("#dynamic-table").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#dynamic-table_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+}

@@ -15,10 +15,12 @@ namespace PMS.BLL
     {
         IStudentRepository _studentRepository;
         ICollegeRepository _collegeRepository;
-        public StudentBLL(IStudentRepository studentRepository, ICollegeRepository collegeRepository)
+        IPlacementAllocationRepository _placementAllocationRepository;
+        public StudentBLL(IStudentRepository studentRepository, ICollegeRepository collegeRepository,IPlacementAllocationRepository placementAllocationRepository)
         {
             _studentRepository = studentRepository;
             _collegeRepository = collegeRepository;
+            _placementAllocationRepository = placementAllocationRepository;
         }
         public StudentDto GetStudentByID(int Id)
         {
@@ -43,27 +45,54 @@ namespace PMS.BLL
             return _studentDto;
         }
 
+        /* public List<StudentDto> GetAllStudentByCollegeId(int collegeId)
+         {
+
+             var student = _studentRepository.GetAll(x => x.Department.CollegeId == collegeId,x=>x.Department);
+
+             var studentDtoList = new List<StudentDto>();
+             if(student!=null)
+             {
+                 foreach(var item in student)
+                 {
+                     var studentDto = new StudentDto();
+                     CopyToDto(item, studentDto);
+                     //studentDto.AllocateToDrive = true;
+                     studentDtoList.Add(studentDto);
+
+                 }
+             }
+             return studentDtoList;
+
+
+         }*/
+
         public List<StudentDto> GetAllStudentByCollegeId(int collegeId)
         {
-            
-            var student = _studentRepository.GetAll(x => x.Department.CollegeId == collegeId,x=>x.Department);
-            //var student = _studentRepository.GetAll(x => x.Department != null && x.Department.CollegeId == collegeId);
+            var students = _studentRepository.GetAll(x => x.Department.CollegeId == collegeId, x => x.Department);
             var studentDtoList = new List<StudentDto>();
-            if(student!=null)
+
+            if (students != null)
             {
-                foreach(var item in student)
+                foreach (var student in students)
                 {
                     var studentDto = new StudentDto();
-                    CopyToDto(item, studentDto);
+                    CopyToDto(student, studentDto);
+
+                    // Check if the student is already allocated to any placement drive
+                    var isStudentAllocated = _placementAllocationRepository.Any(x => x.StudentId == studentDto.StudentId);
+
+                    // Update the AllocateToDrive property of the studentDto
+                    studentDto.AllocateToDrive = isStudentAllocated;
+
                     studentDtoList.Add(studentDto);
-
                 }
-            }
-            return studentDtoList;
+            } 
 
+            return studentDtoList;
         }
-        
-       
+
+
 
 
 

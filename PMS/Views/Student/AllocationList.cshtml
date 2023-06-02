@@ -1,0 +1,111 @@
+﻿@model List<PMS.BOL.StudentDto>;
+@{
+    ViewBag.Title = "AllocationList";
+}
+<!-- Content Wrapper. Contains page content -->
+<div>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Allocation List</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Allocation List</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        @using (Html.BeginForm("Allocate", "PlacementAllocation", FormMethod.Post))
+                        {
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div class="card-body">
+                                    <table id="dynamic-table" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Allocate</th>
+                                                <th>Register No.</th>
+                                                <th>Name</th>
+                                                <th>Gender</th>
+                                                <th>Dob</th>
+                                                <th>Mobile No.</th>
+                                                <th>Email Id</th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for (int i = 0; i < Model.Count(); i++)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.CheckBoxFor(x=>x[i].AllocateToDrive)
+                                                        @Html.HiddenFor(x=>x[i].StudentId)
+                                                    </td>
+                                                    <td>@Html.DisplayFor(x=>x[i].RegisterNo)</td>
+                                                    <td>@Html.DisplayFor(x=>x[i].Name)</td>
+                                                    <td>@Html.DisplayFor(x=>x[i].Gender)</td>
+                                                    <td>@Html.DisplayFor(x=>x[i].Dob)</td>
+                                                    <td>@Html.DisplayFor(x=>x[i].MobileNo)</td>
+                                                    <td>@Html.DisplayFor(x=>x[i].EmailId)</td>
+
+
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                     
+                                </div>
+                                <!-- /.card-body -->
+                        </div>
+                            <div class="row mt-3">
+                                <div class="col -12 text-right">
+
+                                    <button class="btn btn-primary" type="submit">Allocate</button>
+
+                                </div>
+                            </div>
+                        }
+                        <!-- /.card -->
+                    </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+@section Scripts
+    {
+<script>
+    //function Allocateselected(){
+    //    var selectedIds=Array.from(document.querySelectorAll('input[name="selectedIds"]:checked')).map(checkbox=>checkbox.value);
+    //    if(selectedIds.length==0){
+    //        alert("Please select atleast one student to allocate.");
+    //        return;
+    //    }
+    //    var url='@Url.ActionLink("","")'
+    //}
+
+    $(function () {
+        $("#dynamic-table").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#dynamic-table_wrapper .col-md-6:eq(0)');
+    });
+</script>
+}

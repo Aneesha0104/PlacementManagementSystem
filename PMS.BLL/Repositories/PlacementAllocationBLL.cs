@@ -28,11 +28,11 @@ namespace PMS.BLL
             if (placementAllocation != null) CopyToDto(placementAllocation, placementAllocationDto);
             return placementAllocationDto;
         }
-         public PlacementAllocationDto GetPlacementAllocationByPlacementDriveId(int placementDriveId)
+        public PlacementAllocationDto GetPlacementAllocationByPlacementDriveId(int placementDriveId)
         {
-            var placementAllocation = _placementAllocationRepository.FirstOrDefault(x => x.PlacementDriveId==placementDriveId,include:x=>x.Include(y => y.PlacementDrive));
+            var placementAllocation = _placementAllocationRepository.FirstOrDefault(x => x.PlacementDriveId == placementDriveId, include: x => x.Include(y => y.PlacementDrive));
             var placementAllocationDto = new PlacementAllocationDto();
-            if(placementAllocation!=null) CopyToDto(placementAllocation,placementAllocationDto);
+            if (placementAllocation != null) CopyToDto(placementAllocation, placementAllocationDto);
             return placementAllocationDto;
         }
 
@@ -59,30 +59,55 @@ namespace PMS.BLL
             }
             return placementAllocationDtoList;
         }
-        
+        public bool AllocatePlacementDriveToStudent(List<StudentDto> studentDto, int pId)
+        {
+            bool bRet = false;
+            if (pId != 0)
+            {
+                try
+                {
+                    foreach (var item in studentDto.Where(x => x.AllocateToDrive == true))
+                    {
+                        var placementAllocation = new PlacementAllocation();
+                        placementAllocation.StudentId = item.StudentId;
+                        placementAllocation.PlacementDriveId = pId;
+                        placementAllocation.PlacementStatus = (byte)PMSEnums.PlacementStatus.ALLOCATED;
+                        _placementAllocationRepository.Insert(placementAllocation);
+                    }
+                    bRet = true;
+                }
+                catch (Exception ex)
+                {
+                    bRet = false;
+                }
+            }
 
-        void CopyFromDto(PlacementAllocationDto source,PlacementAllocation target)
+            return bRet;
+        }
+
+
+        void CopyFromDto(PlacementAllocationDto source, PlacementAllocation target)
         {
             target.Rating = source.Rating;
             target.PlacementStatus = source.PlacementStatus;
 
 
         }
-        void CopyToDto (PlacementAllocation source,PlacementAllocationDto target)
+        void CopyToDto(PlacementAllocation source, PlacementAllocationDto target)
         {
-            target.PlacementAllocationId= source.PlacementAllocationId;
-            target.PlacementDriveId= source.PlacementDriveId;
+            target.PlacementAllocationId = source.PlacementAllocationId;
+            target.PlacementDriveId = source.PlacementDriveId;
             target.PlacementStatus = source.PlacementStatus;
-            target.StudentId= source.StudentId;
-            target.CommentId= source.CommentId;
+            target.StudentId = source.StudentId;
+            target.CommentId = source.CommentId;
             target.StudentDto = new StudentDto();
             target.StudentDto.Name = source.Student?.Name;
             target.PlacementDriveDto = new PlacementDriveDto();
             target.PlacementDriveDto.CompanyDto.Name = source.PlacementDrive.Company.Name;
 
-            
+
         }
 
     }
-    
+
 }

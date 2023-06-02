@@ -14,12 +14,14 @@ namespace PMS.Controllers
         IUserBLL _userBLL;
         ICollegeBLL _collegeBLL;
         ICompanyBLL _companyBLL;
+        IStudentBLL _studentBLL;
         public HomeController(ILogger<HomeController> logger, IUserBLL userBLL,ICollegeBLL collegeBLL,ICompanyBLL companyBLL, IStudentBLL studentBLL)
         {
             _logger = logger;
             _userBLL = userBLL;
             _collegeBLL = collegeBLL;
             _companyBLL= companyBLL;
+            _studentBLL = studentBLL;
         }
 
         public IActionResult Index()
@@ -57,7 +59,7 @@ namespace PMS.Controllers
                         case (byte)PMSEnums.UserType.STUDENT:
                             userVm.UserType = (byte)PMSEnums.UserType.STUDENT;
                             userVm.UserName = userDto.Username;
-
+                            userVm.StudentDto = _studentBLL.GetStudentByID(userDto.UserId);
                             break;
                         case (byte)PMSEnums.UserType.COLLEGE:
                             userVm.CollegeDto = _collegeBLL.GetCollegeByUserId(userDto.UserId);

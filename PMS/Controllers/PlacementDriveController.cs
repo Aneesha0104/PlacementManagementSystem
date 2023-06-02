@@ -20,10 +20,17 @@ namespace PMS.Controllers
         }
         public IActionResult DriveList(int companyId)
         {
-            var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
-            var driveList=_placementDriveBll.GetPlacementDriveByCompanyId(loogedInUser.CompanyDto.CompanyId);
+            var loggedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+            var driveList = _placementDriveBll.GetPlacementDriveByCompanyId(loggedInUser.CompanyDto.CompanyId);
+
+            if (driveList == null)
+            {
+                driveList = new List<PlacementDriveDto>(); // Create an empty list if the driveList is null
+            }
+
             return View(driveList);
         }
+
 
         public IActionResult Index()
         {

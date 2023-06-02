@@ -23,17 +23,26 @@ namespace PMS.BLL
             _companyRepository = companyRepository;
         }
 
-        public PlacementDriveDto GetPlacementDriveByCompanyId(int companyId)
+        public List<PlacementDriveDto> GetPlacementDriveByCompanyId(int companyId)
         {
-            var placementdrive = _placementDriveRepository.FirstOrDefault(x => x.CompanyId == companyId, include: x => x.Include(Y => Y.Company));
-            var placementdriveDto = new PlacementDriveDto();
-            if (placementdrive != null) CopyToDto(placementdrive, placementdriveDto);
-            return placementdriveDto;
+            var drives = _placementDriveRepository.GetAll(x => x.CompanyId == companyId);
+            var driveDtoList = new List<PlacementDriveDto>();
 
+            if (drives != null)
+            {
+                foreach (var drive in drives)
+                {
+                    var driveDto = new PlacementDriveDto();
+                    CopyToDto(drive, driveDto);
 
+                    driveDtoList.Add(driveDto);
+                }
+            }
 
+            return driveDtoList;
         }
-         public PlacementDriveDto GetPlacementDriveByCollegeId(int collegeId)
+
+        public PlacementDriveDto GetPlacementDriveByCollegeId(int collegeId)
          {
              var placementdrive = _placementDriveRepository.FirstOrDefault(x => x.CollegeId == collegeId, include: x => x.Include(Y => Y.College));
              var placementdriveDto = new PlacementDriveDto();
@@ -140,7 +149,10 @@ namespace PMS.BLL
             target.CollegeId = source.CollegeId;
             target.CompanyId = source.CompanyId;
             target.CollegeDto = new CollegeDto();
-            target.CollegeDto.CollegeName = source.College.CollegeName;
+            if (source.College != null)
+            {
+                target.CollegeDto.CollegeName = source.College.CollegeName;
+            }
             target.CompanyDto = new CompanyDto();
             if (source.Company != null)
             {

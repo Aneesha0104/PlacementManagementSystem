@@ -1,4 +1,5 @@
-﻿@model IEnumerable<PMS.BOL.PlacementDriveDto>;
+﻿@model IEnumerable<PMS.BOL.PlacementDriveDto>
+
 @{
     ViewBag.Title = "driveList";
 }
@@ -37,7 +38,6 @@
                                         <th>Package</th>
                                         <th>Place</th>
                                         <th>Details</th>
-                                        <th>Allocate</th>
                                         <th>Proceed</th>
                                     </tr>
                                 </thead>
@@ -45,8 +45,7 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                             <td>@item.CompanyId</td>
-                                            <td>@item.CompanyDto.Name</td>
+                                             
                                             <td>@item.InterviewDate</td>
                                             <td>@item.Package</td>
                                             <td>@item.Place</td>

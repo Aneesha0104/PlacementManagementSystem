@@ -11,6 +11,7 @@ using MimeKit.Encodings;
 using Org.BouncyCastle.Math.EC.Rfc7748;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace PMS.BLL
 {
     public class PlacementAllocationBLL : IPlacementAllocationBLL
@@ -59,6 +60,22 @@ namespace PMS.BLL
             }
             return placementAllocationDtoList;
         }
+        public List<PlacementAllocationDto> GetAllAllocatedStudent(int placementDriveId)
+        {
+            var placementAllocation = _placementAllocationRepository.GetAll(x => x.PlacementDriveId == placementDriveId, x => x.Student, x => x.PlacementDrive, x => x.PlacementDrive.Company
+                                    , x => x.Student.Department, x => x.Student.Department.College);
+            var placementAllocationDtoList = new List<PlacementAllocationDto>();
+            if (placementAllocation != null) { }
+            {
+                foreach (var item in placementAllocation)
+                {
+                    var placementAllocationDto = new PlacementAllocationDto();
+                    CopyToDto(item, placementAllocationDto);
+                    placementAllocationDtoList.Add(placementAllocationDto);
+                }
+            }
+            return placementAllocationDtoList;
+        }
         public bool AllocatePlacementDriveToStudent(List<StudentDto> studentDto, int pId)
         {
             bool bRet = false;
@@ -72,7 +89,8 @@ namespace PMS.BLL
                         placementAllocation.StudentId = item.StudentId;
                         placementAllocation.PlacementDriveId = pId;
                         placementAllocation.PlacementStatus = (byte)PMSEnums.PlacementStatus.ALLOCATED;
-                        _placementAllocationRepository.Insert(placementAllocation);
+                        var allocation = _placementAllocationRepository.FirstOrDefault(x => x.StudentId == item.StudentId && x.PlacementDriveId == pId);
+                        if (allocation == null) _placementAllocationRepository.Insert(placementAllocation);
                     }
                     bRet = true;
                 }
@@ -100,10 +118,11 @@ namespace PMS.BLL
             target.PlacementStatus = source.PlacementStatus;
             target.StudentId = source.StudentId;
             target.CommentId = source.CommentId;
-            target.StudentDto = new StudentDto();
+            target.StudentDto = new StudentDto { DepartmentDto = new DepartmentDto { CollegeDto = new CollegeDto() } };
             target.StudentDto.Name = source.Student?.Name;
-            target.PlacementDriveDto = new PlacementDriveDto();
+            target.PlacementDriveDto = new PlacementDriveDto { CompanyDto = new CompanyDto() };
             target.PlacementDriveDto.CompanyDto.Name = source.PlacementDrive.Company.Name;
+            target.StudentDto.DepartmentDto.CollegeDto.CollegeName = source.Student?.Department?.College?.CollegeName;
 
 
         }

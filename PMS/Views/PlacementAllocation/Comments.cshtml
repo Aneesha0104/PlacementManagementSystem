@@ -1,7 +1,7 @@
-﻿@model IEnumerable<PMS.BOL.PlacementDriveDto>
+﻿@model IEnumerable<PMS.BOL.PlacementAllocationDto>
 
 @{
-    ViewBag.Title = "driveList";
+    ViewBag.Title = "Comments";
 }
 <!-- Content Wrapper. Contains page content -->
 <div>
@@ -9,13 +9,13 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1> List of PlacementDrive</h1>
+                <div class="col-sm-6"> 
+                    <h1> allocated Students</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Placementdrive List</li>
+                        <li class="breadcrumb-item active">Allocated students</li>
                     </ol>
                 </div>
             </div>
@@ -34,27 +34,23 @@
                             <table id="dynamic-table" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Interview Date</th>
-                                        <th>Package</th>
-                                        <th>Place</th>
-                                        <th>Details</th>
-                                        <th>Proceed</th>
+                                        <th>Name</th>
+                                        <th>Feedback for Student</th>
+                                        <th>Placement Status</th>
+                                        <th>Note(Restricted to Company)</th>
+                                        
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                             
-                                            <td>@item.InterviewDate</td>
-                                            <td>@item.Package</td>
-                                            <td>@item.Place</td>
-                                            <td>@item.Details</td>
-                                            <td>
-                                                 <a class="btn btn-primary"href="@Url.Action("AllocatedStudentsList","PlacementAllocation",new { id = @item.PlacementDriveId})">Proceed</a>                                          
-                                            </td>
                                            
-                                            
+                                            <td>@item.StudentDto?.Name</td>
+                                            <label for="feedback">Feedback for Student</label>
+                                            <input type="text" id="feedback" name="Feedback"/>
+                                           
                                         </tr>
                                     }
                                 </tbody>
@@ -83,3 +79,4 @@
         });
     </script>
 }
+

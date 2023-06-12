@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Org.BouncyCastle.Math.EC.Rfc7748;
 using PMS.BOL;
 using PMS.DAL;
 using PMS.DAL.Models;
@@ -44,7 +43,7 @@ namespace PMS.BLL
             _studentDto.Departmentlist =new List<SelectListItem>();
             return _studentDto;
         }
-
+        
        
 
         public List<StudentDto> GetAllStudentByCollegeId(int collegeId)
@@ -71,6 +70,9 @@ namespace PMS.BLL
 
             return studentDtoList;
         }
+
+        
+     
 
         public List<StudentDto>GetAllStudentsByPlacementDriveId(int placementDriveId)
         {

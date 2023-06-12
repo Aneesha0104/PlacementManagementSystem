@@ -10,7 +10,7 @@ namespace PMS.BLL
         PlacementAllocationDto GetPlacementAllocationByPlacementDriveId(int placementDriveId);
         List<PlacementAllocationDto> GetAllPlacementAllocationbll();
         bool AllocatePlacementDriveToStudent(List<StudentDto> studentDto, int pId);
-
+        List<PlacementAllocationDto> GetAllAllocatedStudent(int placementDriveId);
 
 
 

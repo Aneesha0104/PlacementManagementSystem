@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PMS.BOL.StudentDto>
+﻿@model IEnumerable<PMS.BOL.PlacementAllocationDto>
 
 @{
     ViewBag.Title = "AllocatedStudentsList";
@@ -9,7 +9,7 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <div class="col-sm-6"> 
                     <h1> allocated Students</h1>
                 </div>
                 <div class="col-sm-6">
@@ -46,10 +46,10 @@
                                     {
                                         <tr>
                                            
-                                            <td>@item.Name</td>
-                                            <td>@item.DepartmentDto.CollegeDto.CollegeName</td>
+                                            <td>@item.StudentDto?.Name</td>
+                                            <td>@item.StudentDto?.DepartmentDto?.CollegeDto?.CollegeName</td>
                                             <td>
-                                                <a class="btn btn-primary"href="">Interview</a>                                          
+                                                <a class="btn btn-primary"href="@Url.Action("Comments","PlacementAllocation",new { id = @item.StudentId})">Interview</a>                                         
                                             </td>
                                         </tr>
                                     }

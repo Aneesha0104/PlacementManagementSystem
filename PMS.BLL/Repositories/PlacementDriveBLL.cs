@@ -34,7 +34,7 @@ namespace PMS.BLL
                 {
                     var driveDto = new PlacementDriveDto();
                     CopyToDto(drive, driveDto);
-
+                    
                     driveDtoList.Add(driveDto);
                 }
             }
@@ -50,7 +50,7 @@ namespace PMS.BLL
             return placementdriveDto;
         }
        
-
+       
 
 
         public List<PlacementDriveDto> GetAllPlacementDrivebll()

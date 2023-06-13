@@ -28,7 +28,11 @@ namespace PMS.BLL
         {
             var placementAllocation = _placementAllocationRepository.FirstOrDefault(x => x.PlacementAllocationId == placementAllocationId, include: x => x.Include(y => y.Student));
             var placementAllocationDto = new PlacementAllocationDto();
-            if (placementAllocation != null) CopyToDto(placementAllocation, placementAllocationDto);
+            if (placementAllocation != null)
+            {
+                CopyToDto(placementAllocation, placementAllocationDto);
+                
+            }
             return placementAllocationDto;
         }
         public PlacementAllocationDto GetPlacementAllocationByPlacementDriveId(int placementDriveId)
@@ -47,16 +51,31 @@ namespace PMS.BLL
             return placementAllocationDto;
         }
 
-        public PlacementAllocationDto SaveComment(int placementAllocationId,string commentText)
+       
+
+        public void InterviewComments(int placementAllocationId,string feedback,string note)
         {
-           
-            
+            var placementAllocation = _placementAllocationRepository.FirstOrDefault(x => x.PlacementAllocationId == placementAllocationId);
+            var placementAllocationDto = new PlacementAllocationDto();
+
+            if (placementAllocation != null)
+            {
+                var comment = new Comment
+                {
+                    CommentForStudent= feedback,
+                    CommentForOrg= note,
+                    CreatedOn= DateTime.Now,
+                    PlacementAllocationId = placementAllocationId
+                    
 
 
+                };
+                placementAllocation.Comments.Add(comment);
+                _placementAllocationRepository.Update(placementAllocation);
+                
+            }        
 
-
-
-            }
+        }
 
         
         

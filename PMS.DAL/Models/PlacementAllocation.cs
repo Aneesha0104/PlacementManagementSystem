@@ -24,6 +24,7 @@ public partial class PlacementAllocation
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
     public virtual PlacementDrive PlacementDrive { get; set; }
+   
 
     public virtual Student Student { get; set; }
 }

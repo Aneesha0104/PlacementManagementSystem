@@ -17,9 +17,11 @@ namespace PMS.BLL
     public class PlacementAllocationBLL : IPlacementAllocationBLL
     {
         IPlacementAllocationRepository _placementAllocationRepository;
-        public PlacementAllocationBLL(IPlacementAllocationRepository placementAllocationRepository)
+        IStudentRepository _studentRepository;
+        public PlacementAllocationBLL(IPlacementAllocationRepository placementAllocationRepository,IStudentRepository studentRepository)
         {
             _placementAllocationRepository = placementAllocationRepository;
+            _studentRepository = studentRepository;
         }
 
         public PlacementAllocationDto GetPlacementAllocationByPlacementAllocationId(int placementAllocationId)
@@ -44,6 +46,20 @@ namespace PMS.BLL
             if (placementAllocation != null) CopyToDto(placementAllocation, placementAllocationDto);
             return placementAllocationDto;
         }
+
+        public PlacementAllocationDto SaveComment(int placementAllocationId,string commentText)
+        {
+           
+            
+
+
+
+
+
+            }
+
+        
+        
 
         public List<PlacementAllocationDto> GetAllPlacementAllocationbll()
         {
@@ -102,6 +118,8 @@ namespace PMS.BLL
 
             return bRet;
         }
+
+
 
 
         void CopyFromDto(PlacementAllocationDto source, PlacementAllocation target)

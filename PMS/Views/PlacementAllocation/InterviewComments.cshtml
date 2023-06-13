@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<PMS.BOL.PlacementAllocationDto>
 
 @{
-    ViewBag.Title = "AllocatedStudentsList";
+    ViewBag.Title = "Comments";
 }
 <!-- Content Wrapper. Contains page content -->
 <div>
@@ -35,8 +35,9 @@
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>college Name</th>
-                                        <th>Interview</th>
+                                        <th>Feedback for Student</th>
+                                        <th>Placement Status</th>
+                                        <th>Note(Restricted to Company)</th>
                                         
                                         
                                     </tr>
@@ -47,10 +48,9 @@
                                         <tr>
                                            
                                             <td>@item.StudentDto?.Name</td>
-                                            <td>@item.StudentDto?.DepartmentDto?.CollegeDto?.CollegeName</td>
-                                            <td>
-                                                <a class="btn btn-primary"href="@Url.Action("InterviewComments","PlacementAllocation",new { id = @item.StudentId})">Interview</a>                                         
-                                            </td>
+                                            <label for="feedback">Feedback for Student</label>
+                                            <input type="text" id="feedback" name="Feedback"/>
+                                           
                                         </tr>
                                     }
                                 </tbody>

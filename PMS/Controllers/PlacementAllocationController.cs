@@ -40,13 +40,17 @@ namespace PMS.Controllers
             var allocatedstudents = _placementAllocationBLL.GetAllAllocatedStudent(id);
             return View(allocatedstudents);
         }
-        public IActionResult InterviewComments(int placementAllocationId,string feedback,string note)
+        //public IActionResult InterviewComments(int placementAllocationId, string feedback, string note)
+        //{
+        //    _placementAllocationBLL.InterviewComments(placementAllocationId, feedback, note);
+        //    return View(InterviewComments);
+
+        //}
+        public IActionResult InterviewComments()
         {
-            _placementAllocationBLL.InterviewComments(placementAllocationId, feedback, note);
-            return RedirectToAction("InterviewComments", "PlacementAllocation");
+            return View();
         }
 
-       
 
     }
 }

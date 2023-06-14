@@ -1,7 +1,7 @@
 ﻿
 @model PMS.BOL.PlacementAllocationDto
 @{
-    ViewBag.Title="InterviewComments"
+    
 }
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -37,11 +37,11 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Create Company</h3>
+                        <h3 class="card-title">Enter Comments</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    @using (Html.BeginForm("InterviewComment", "PlacementAllocation", FormMethod.Post))
+                    @*@using (Html.BeginForm("InterviewComment", "PlacementAllocation", FormMethod.Post))
                     {
                         <div class="card-body">
                             <div class="form-group">
@@ -53,14 +53,14 @@
                                 @Html.TextAreaFor(x => x.CommentForOrg, new { @class = "form-control",@placeholder="commentForOrg" })
                             </div>
                             
-                        </div>
+                        </div>*@
                        
                         <!-- /.card-body -->
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary float-right">Submit</button>
                         </div>
-                    }
+                    @*}*@
                 </div>
             </div>
         </div>

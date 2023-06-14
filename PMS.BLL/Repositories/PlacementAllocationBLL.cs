@@ -137,7 +137,34 @@ namespace PMS.BLL
 
             return bRet;
         }
+        public List<PlacementAllocationDto> GetAllPlacedStudents()
+        {
+            var placementAllocation = _placementAllocationRepository.GetAll(x => x.PlacementStatus == (byte)PMSEnums.PlacementStatus.PLACED, x => x.Student, x => x.PlacementDrive);
+            var placementAllocationDtoList = new List<PlacementAllocationDto>();
+            if (placementAllocation != null) { }
+            {
+                foreach (var item in placementAllocation)
+                {
+                    var placedStudentsList = new PlacementAllocationDto();
+                    CopyToDto(item, placedStudentsList);
+                    placementAllocationDtoList.Add(placedStudentsList);
+                }
+            }
+            return placementAllocationDtoList;
+        }
+        //public List<PlacementAllocationDto>GetAllPlacedStudentsByCollegeId(int collegeId)
+        //{
+        //    var placedStudents = _placementAllocationRepository.FirstOrDefault(x => x.PlacementDrive.CollegeId == collegeId, include: x => x.Include(y => y.Student));
+        //    var placementAllocationDto = new PlacementAllocationDto();
+        //    if (placedStudents != null) CopyToDto(placedStudents, placementAllocationDto);
+        //    return placementAllocationDto;
 
+        //}
+
+        
+        
+
+        
 
 
 

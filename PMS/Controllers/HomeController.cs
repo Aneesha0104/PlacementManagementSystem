@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Newtonsoft.Json;
 using PMS.BLL;
 using PMS.BOL;
@@ -92,6 +94,12 @@ namespace PMS.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Logout()
+        {
+            _userBLL.Logout();
+            return RedirectToAction("Login", "Home");
         }
     }
 }

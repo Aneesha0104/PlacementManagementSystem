@@ -35,7 +35,10 @@ public partial class PmsdbContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=TRPRD58XH2Y8-L\\SQLEXPRESS;Database=PMSDB;Trusted_Connection=True;TrustServerCertificate=True;");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<AcademicDetail>(entity =>
@@ -100,12 +103,6 @@ public partial class PmsdbContext : DbContext
                 .IsRequired()
                 .HasMaxLength(500);
             entity.Property(e => e.CreatedOn).HasColumnType("date");
-            entity.Property(e => e.PlacementAllocationId).HasColumnName("PlacementAllocationID");
-
-            entity.HasOne(d => d.PlacementAllocation).WithMany(p => p.Comments)
-                .HasForeignKey(d => d.PlacementAllocationId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Comments_PlacementAllocation");
         });
 
         modelBuilder.Entity<Company>(entity =>
@@ -182,13 +179,15 @@ public partial class PmsdbContext : DbContext
             entity.ToTable("PlacementAllocation");
 
             entity.Property(e => e.PlacementAllocationId).HasColumnName("PlacementAllocationID");
-            entity.Property(e => e.CommentId)
-                .HasMaxLength(50)
-                .HasColumnName("CommentID");
+            entity.Property(e => e.CommentId).HasColumnName("CommentID");
             entity.Property(e => e.PlacementDriveId).HasColumnName("PlacementDriveID");
             entity.Property(e => e.PlacementStatus).HasComment("Scheduled, Passed , Failed");
             entity.Property(e => e.Rating).HasMaxLength(50);
             entity.Property(e => e.StudentId).HasColumnName("StudentID");
+
+            entity.HasOne(d => d.Comment).WithMany(p => p.PlacementAllocations)
+                .HasForeignKey(d => d.CommentId)
+                .HasConstraintName("FK_PlacementAllocation_Comments");
 
             entity.HasOne(d => d.PlacementDrive).WithMany(p => p.PlacementAllocations)
                 .HasForeignKey(d => d.PlacementDriveId)

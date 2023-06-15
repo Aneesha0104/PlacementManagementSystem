@@ -7,8 +7,6 @@ public partial class Comment
 {
     public int CommentId { get; set; }
 
-    public int PlacementAllocationId { get; set; }
-
     public string CommentForOrg { get; set; }
 
     public string CommentForStudent { get; set; }
@@ -17,5 +15,5 @@ public partial class Comment
 
     public byte Status { get; set; }
 
-    public virtual PlacementAllocation PlacementAllocation { get; set; }
+    public virtual ICollection<PlacementAllocation> PlacementAllocations { get; set; } = new List<PlacementAllocation>();
 }

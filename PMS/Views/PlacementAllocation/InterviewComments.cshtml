@@ -1,7 +1,9 @@
-﻿
+﻿@using static PMS.BOL.PMSEnums
+
 @model PMS.BOL.PlacementAllocationDto
 @{
-    
+    var statusList = ViewBag.Statuslist as List<PlacementStatus>;
+
 }
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -41,26 +43,36 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    @*@using (Html.BeginForm("InterviewComment", "PlacementAllocation", FormMethod.Post))
+                    @using (Html.BeginForm("InterviewComments", "PlacementAllocation", FormMethod.Post))
                     {
+                        @Html.HiddenFor(x=>x.PlacementAllocationId)
                         <div class="card-body">
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Comment.CommentforStudent "CommentForStudent")
-                                @Html.TextBoxFor(x => x.Name, new { @class = "form-control",@placeholder="CommentForStudent",@required=true })
+                                @Html.LabelFor(model => model.CommentDto.CommentForStudent ,"Comment For Student")
+                                @Html.TextAreaFor(x => x.CommentDto.CommentForStudent, new { @class = "form-control",@placeholder="CommentForStudent",@required=true })
                             </div>
                             <div class="form-group">
-                                @Html.LabelFor(model => model.CommentForOrg, "commentForOrg")
-                                @Html.TextAreaFor(x => x.CommentForOrg, new { @class = "form-control",@placeholder="commentForOrg" })
+                                @Html.LabelFor(model => model.CommentDto.CommentForOrg, "Comment For Org")
+                                @Html.TextAreaFor(x => x.CommentDto.CommentForOrg, new { @class = "form-control",@placeholder="CommentForOrg" })
                             </div>
+                          @*  <div class="form-group">
+                                @Html.LabelFor(model => model.PlacementStatus, "Placement Status")
+                                @Html.EnumDropDownListFor("statusList",new SelectList(statusList,"Value","Text"),"--Select Status")
+                            </div>
+                           *@
+                           @* <div class="form-group">
+                                @Html.LabelFor(model => model.CommentDto.CommentForOrg, "Comment For Org")
+                                @Html.GetEnumSelectList
+                            </div>*@
                             
-                        </div>*@
+                        </div>
                        
                         <!-- /.card-body -->
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary float-right">Submit</button>
                         </div>
-                    @*}*@
+                    }
                 </div>
             </div>
         </div>

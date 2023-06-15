@@ -1,9 +1,8 @@
-﻿
-
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PMS.BLL;
 using PMS.BOL;
+using static PMS.BOL.PMSEnums;
 
 namespace PMS.Controllers
 {
@@ -34,23 +33,40 @@ namespace PMS.Controllers
             return RedirectToAction("PlacementDriveList", "PlacementDrive");
         }
 
+        public IActionResult PlacedStatus(int studentId)
+        {
+            var loggedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+            var placedStatus = _placementAllocationBLL.GetPlacementAllocationByStudentId(loggedInUser.StudentId);
+
+           
+
+            return View(placedStatus);
+        }
         public IActionResult AllocatedStudentsList(int id)
         {
 
             var allocatedstudents = _placementAllocationBLL.GetAllAllocatedStudent(id);
             return View(allocatedstudents);
         }
-        //public IActionResult InterviewComments(int placementAllocationId, string feedback, string note)
-        //{
-        //    _placementAllocationBLL.InterviewComments(placementAllocationId, feedback, note);
-        //    return View(InterviewComments);
-
-        //}
-        public IActionResult InterviewComments()
+        
+        public IActionResult InterviewComments(int placementAllocationId)
         {
+             var statusList=Enum.GetValues(typeof(PlacementStatus)).Cast<PlacementStatus>().ToList();
+            ViewBag.StatusList=statusList;
+      //    ViewBag.statusList = new SelectList(_placementAllocationBLL.GetAllPlacementAllocationbll(), "PlacementStatus");
+            PlacementAllocationDto placementAllocationDto = new PlacementAllocationDto();
+            placementAllocationDto.PlacementAllocationId = placementAllocationId;
+            return View(placementAllocationDto);
+        }
+        [HttpPost]
+        public IActionResult InterviewComments(PlacementAllocationDto placementAllocationDto)
+        {
+            if (ModelState.IsValid)
+            {
+                _placementAllocationBLL.InterviewComments(placementAllocationDto);
+                return RedirectToAction("AllocatedStudentsList");
+            }
             return View();
         }
-
-
     }
 }

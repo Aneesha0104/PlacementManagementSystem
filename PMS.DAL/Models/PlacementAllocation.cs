@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using static PMS.BOL.PMSEnums;
 
 namespace PMS.DAL.Models;
 
@@ -19,6 +20,7 @@ public partial class PlacementAllocation
     /// Scheduled, Passed , Failed
     /// </summary>
     public byte PlacementStatus { get; set; }
+   
 
     public virtual Comment Comment { get; set; }
 

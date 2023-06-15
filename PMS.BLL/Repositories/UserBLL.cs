@@ -44,13 +44,13 @@ namespace PMS.BLL
         }
         public void Logout()
         {
-            var httpcontext=_httpContextAccessor.HttpContext;
+            var httpcontext = _httpContextAccessor.HttpContext;
             httpcontext.SignOutAsync();
             httpcontext.Session.Clear();
         }
 
-        
-       
+
+
 
         #region Copy 
         void CopyFromDto(UserDto source, User target)

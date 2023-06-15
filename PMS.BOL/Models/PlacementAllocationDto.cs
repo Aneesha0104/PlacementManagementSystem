@@ -10,15 +10,15 @@ namespace PMS.BOL
 
         public int StudentId { get; set; }
 
-        public string CommentId { get; set; }
+        public int? CommentId { get; set; }
 
         public string Rating { get; set; }
 
         public byte PlacementStatus { get; set; }
         public StudentDto StudentDto { get; set; }
         public PlacementDriveDto PlacementDriveDto { get; set; }
-        
-        
+        public CommentDto CommentDto { get; set; }
+
 
     }
 }

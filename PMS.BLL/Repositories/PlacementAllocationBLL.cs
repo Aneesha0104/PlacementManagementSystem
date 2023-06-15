@@ -45,37 +45,41 @@ namespace PMS.BLL
 
         public PlacementAllocationDto GetPlacementAllocationByStudentId(int studentId)
         {
-            var placementAllocation = _placementAllocationRepository.FirstOrDefault(x => x.StudentId == studentId, include: x => x.Include(y => y.Student));
+            var placementAllocation = _placementAllocationRepository.GetAll(x => x.StudentId == studentId);
             var placementAllocationDto = new PlacementAllocationDto();
-            if (placementAllocation != null) CopyToDto(placementAllocation, placementAllocationDto);
+            if (placementAllocation != null)
+            {foreach(var placement in placementAllocation)
+
+
+                {
+                    var placementallocationDto = new PlacementAllocationDto();
+                    CopyToDto(placement, placementAllocationDto);
+
+
+                }
+            }
+               
             return placementAllocationDto;
         }
 
        
 
-        public void InterviewComments(int placementAllocationId,string feedback,string note)
+        public void InterviewComments(PlacementAllocationDto placementAlctnnDto)
         {
-            var placementAllocation = _placementAllocationRepository.FirstOrDefault(x => x.PlacementAllocationId == placementAllocationId);
-            var placementAllocationDto = new PlacementAllocationDto();
+            var placementAllocation = _placementAllocationRepository.FirstOrDefault(x => x.PlacementAllocationId == placementAlctnnDto.PlacementAllocationId);
 
             if (placementAllocation != null)
             {
-                var comment = new Comment
-                {
-                    CommentForStudent= feedback,
-                    CommentForOrg= note,
-                    CreatedOn= DateTime.Now,
-                    PlacementAllocationId = placementAllocationId
-                    
+                placementAllocation.Comment = placementAllocation.Comment ?? new Comment();
+                placementAllocation.Comment.CommentForOrg = placementAlctnnDto.CommentDto.CommentForOrg;
 
-
-                };
-                placementAllocation.Comments.Add(comment);
                 _placementAllocationRepository.Update(placementAllocation);
                 
             }        
 
         }
+       
+
 
         
         

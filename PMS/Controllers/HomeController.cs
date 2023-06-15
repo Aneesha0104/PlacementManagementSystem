@@ -98,7 +98,7 @@ namespace PMS.Controllers
 
         public IActionResult Logout()
         {
-            _userBLL.Logout();
+            HttpContext.Session.Remove("LoggedInUser"); ;
             return RedirectToAction("Login", "Home");
         }
     }

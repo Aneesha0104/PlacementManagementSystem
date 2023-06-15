@@ -5,7 +5,7 @@ namespace PMS.BLL
 {
     public interface IPlacementDriveBLL
     {
-        PlacementDriveDto GetPlacementDriveByCompanyId(int CompanyId);
+        public List<PlacementDriveDto> GetPlacementDriveByCompanyId(int companyId);
         public PlacementDriveDto GetPlacementDriveByCollegeId(int collegeId);
         List<PlacementDriveDto> GetAllPlacementDrivebll();
         PlacementDriveDto GetPlacementDriveByPlacementDriveId(int PlacementDriveId);

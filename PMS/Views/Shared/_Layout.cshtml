@@ -93,6 +93,7 @@
                 <!-- Navbar Search -->
                 <li class="nav-item">
                     <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                    
                         <i class="fas fa-search"></i>
                     </a>
                     <div class="navbar-search-block">
@@ -209,6 +210,8 @@
                 </li>
             </ul>
         </nav>
+        
+
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -250,7 +253,7 @@
                             <!-- Add icons to the links using the .nav-icon class
                                  with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="@Url.ActionLink("Index","Home")" class="nav-link">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>
                                         Dashboard
@@ -294,7 +297,7 @@
                             <!-- Add icons to the links using the .nav-icon class
                                  with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="@Url.ActionLink("Index","Home")" class="nav-link">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>
                                         Dashboard
@@ -302,7 +305,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="@Url.ActionLink("Index","Student")" class="nav-link">
                                     <i class="nav-icon fas  fa-sharp fa-regular fa-id-card"></i>
                                     <p>
                                         My Profile
@@ -311,10 +314,10 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="@Url.ActionLink("Edit","Student")" class="nav-link">
                                     <i class="nav-icon fas  far fa-thumbs-up"></i>
                                     <p>
-                                        Placement Drives
+                                        Edit Profile
                                     </p>
                                 </a>
                             </li>
@@ -329,7 +332,7 @@
                             <!-- Add icons to the links using the .nav-icon class
                                  with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="@Url.ActionLink("Index","Home")" class="nav-link">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>
                                         Dashboard
@@ -379,7 +382,7 @@
                             <!-- Add icons to the links using the .nav-icon class
                                  with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="@Url.ActionLink("Index","Home")"class="nav-link">
                                     <i class="nav-icon fas fa-tachometer-alt"></i>
                                     <p>
                                         Dashboard
@@ -395,7 +398,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="@Url.ActionLink("DriveList","PlacementDrive")" class="nav-link">
                                     <i class="nav-icon fas fa-people-arrows"></i>
                                     <p>
                                         Allocated Students

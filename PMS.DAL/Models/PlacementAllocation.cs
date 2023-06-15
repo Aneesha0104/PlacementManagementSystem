@@ -23,6 +23,7 @@ public partial class PlacementAllocation
     public virtual Comment Comment { get; set; }
 
     public virtual PlacementDrive PlacementDrive { get; set; }
+   
 
     public virtual Student Student { get; set; }
 }

@@ -11,21 +11,28 @@ using MimeKit.Encodings;
 using Org.BouncyCastle.Math.EC.Rfc7748;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace PMS.BLL
 {
     public class PlacementAllocationBLL : IPlacementAllocationBLL
     {
         IPlacementAllocationRepository _placementAllocationRepository;
-        public PlacementAllocationBLL(IPlacementAllocationRepository placementAllocationRepository)
+        IStudentRepository _studentRepository;
+        public PlacementAllocationBLL(IPlacementAllocationRepository placementAllocationRepository,IStudentRepository studentRepository)
         {
             _placementAllocationRepository = placementAllocationRepository;
+            _studentRepository = studentRepository;
         }
 
         public PlacementAllocationDto GetPlacementAllocationByPlacementAllocationId(int placementAllocationId)
         {
             var placementAllocation = _placementAllocationRepository.FirstOrDefault(x => x.PlacementAllocationId == placementAllocationId, include: x => x.Include(y => y.Student));
             var placementAllocationDto = new PlacementAllocationDto();
-            if (placementAllocation != null) CopyToDto(placementAllocation, placementAllocationDto);
+            if (placementAllocation != null)
+            {
+                CopyToDto(placementAllocation, placementAllocationDto);
+                
+            }
             return placementAllocationDto;
         }
         public PlacementAllocationDto GetPlacementAllocationByPlacementDriveId(int placementDriveId)
@@ -44,9 +51,54 @@ namespace PMS.BLL
             return placementAllocationDto;
         }
 
+       
+
+        public void InterviewComments(int placementAllocationId,string feedback,string note)
+        {
+            var placementAllocation = _placementAllocationRepository.FirstOrDefault(x => x.PlacementAllocationId == placementAllocationId);
+            var placementAllocationDto = new PlacementAllocationDto();
+
+            if (placementAllocation != null)
+            {
+                var comment = new Comment
+                {
+                    CommentForStudent= feedback,
+                    CommentForOrg= note,
+                    CreatedOn= DateTime.Now,
+                    PlacementAllocationId = placementAllocationId
+                    
+
+
+                };
+                placementAllocation.Comments.Add(comment);
+                _placementAllocationRepository.Update(placementAllocation);
+                
+            }        
+
+        }
+
+        
+        
+
         public List<PlacementAllocationDto> GetAllPlacementAllocationbll()
         {
             var placementAllocation = _placementAllocationRepository.GetAll(x => x.PlacementStatus == (byte)PMSEnums.RecordStatus.ACTIVE, x => x.Student, x => x.PlacementDrive);
+            var placementAllocationDtoList = new List<PlacementAllocationDto>();
+            if (placementAllocation != null) { }
+            {
+                foreach (var item in placementAllocation)
+                {
+                    var placementAllocationDto = new PlacementAllocationDto();
+                    CopyToDto(item, placementAllocationDto);
+                    placementAllocationDtoList.Add(placementAllocationDto);
+                }
+            }
+            return placementAllocationDtoList;
+        }
+        public List<PlacementAllocationDto> GetAllAllocatedStudent(int placementDriveId)
+        {
+            var placementAllocation = _placementAllocationRepository.GetAll(x => x.PlacementDriveId == placementDriveId, x => x.Student, x => x.PlacementDrive, x => x.PlacementDrive.Company
+                                    , x => x.Student.Department, x => x.Student.Department.College);
             var placementAllocationDtoList = new List<PlacementAllocationDto>();
             if (placementAllocation != null) { }
             {
@@ -72,7 +124,8 @@ namespace PMS.BLL
                         placementAllocation.StudentId = item.StudentId;
                         placementAllocation.PlacementDriveId = pId;
                         placementAllocation.PlacementStatus = (byte)PMSEnums.PlacementStatus.ALLOCATED;
-                        _placementAllocationRepository.Insert(placementAllocation);
+                        var allocation = _placementAllocationRepository.FirstOrDefault(x => x.StudentId == item.StudentId && x.PlacementDriveId == pId);
+                        if (allocation == null) _placementAllocationRepository.Insert(placementAllocation);
                     }
                     bRet = true;
                 }
@@ -84,6 +137,35 @@ namespace PMS.BLL
 
             return bRet;
         }
+        public List<PlacementAllocationDto> GetAllPlacedStudents()
+        {
+            var placementAllocation = _placementAllocationRepository.GetAll(x => x.PlacementStatus == (byte)PMSEnums.PlacementStatus.PLACED, x => x.Student, x => x.PlacementDrive);
+            var placementAllocationDtoList = new List<PlacementAllocationDto>();
+            if (placementAllocation != null) { }
+            {
+                foreach (var item in placementAllocation)
+                {
+                    var placedStudentsList = new PlacementAllocationDto();
+                    CopyToDto(item, placedStudentsList);
+                    placementAllocationDtoList.Add(placedStudentsList);
+                }
+            }
+            return placementAllocationDtoList;
+        }
+        //public List<PlacementAllocationDto>GetAllPlacedStudentsByCollegeId(int collegeId)
+        //{
+        //    var placedStudents = _placementAllocationRepository.FirstOrDefault(x => x.PlacementDrive.CollegeId == collegeId, include: x => x.Include(y => y.Student));
+        //    var placementAllocationDto = new PlacementAllocationDto();
+        //    if (placedStudents != null) CopyToDto(placedStudents, placementAllocationDto);
+        //    return placementAllocationDto;
+
+        //}
+
+        
+        
+
+        
+
 
 
         void CopyFromDto(PlacementAllocationDto source, PlacementAllocation target)
@@ -100,10 +182,11 @@ namespace PMS.BLL
             target.PlacementStatus = source.PlacementStatus;
             target.StudentId = source.StudentId;
             target.CommentId = source.CommentId;
-            target.StudentDto = new StudentDto();
+            target.StudentDto = new StudentDto { DepartmentDto = new DepartmentDto { CollegeDto = new CollegeDto() } };
             target.StudentDto.Name = source.Student?.Name;
-            target.PlacementDriveDto = new PlacementDriveDto();
+            target.PlacementDriveDto = new PlacementDriveDto { CompanyDto = new CompanyDto() };
             target.PlacementDriveDto.CompanyDto.Name = source.PlacementDrive.Company.Name;
+            target.StudentDto.DepartmentDto.CollegeDto.CollegeName = source.Student?.Department?.College?.CollegeName;
 
 
         }

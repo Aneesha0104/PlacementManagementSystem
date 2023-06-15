@@ -1,6 +1,9 @@
 ﻿using PMS.BOL;
 using PMS.DAL;
 using PMS.DAL.Models;
+using System.Web;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +15,12 @@ namespace PMS.BLL
     public class UserBLL : IUserBLL
     {
         IUserRepository _userRepository;
+        IHttpContextAccessor _httpContextAccessor;
 
-        public UserBLL(IUserRepository userRepository)
+        public UserBLL(IUserRepository userRepository,IHttpContextAccessor httpContextAccessor)
         {
             _userRepository = userRepository;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public UserDto GetUserByID(int Id)
@@ -37,6 +42,16 @@ namespace PMS.BLL
             var user = _userRepository.FirstOrDefault(x => x.Username == userDto.Username );
             return user != null;
         }
+        public void Logout()
+        {
+            var httpcontext=_httpContextAccessor.HttpContext;
+            httpcontext.SignOutAsync();
+            httpcontext.Session.Clear();
+        }
+
+        
+       
+
         #region Copy 
         void CopyFromDto(UserDto source, User target)
         {

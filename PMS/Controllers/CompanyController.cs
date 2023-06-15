@@ -16,6 +16,8 @@ namespace PMS.Controllers
             var companyList = _CompanyBll.GetAllCompanyBll();
             return View(companyList);
         }
+
+
         public IActionResult Edit(int id)
         {
             ViewBag.ErrorCnfMsg = null;

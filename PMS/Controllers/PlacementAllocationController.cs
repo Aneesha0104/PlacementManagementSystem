@@ -9,7 +9,7 @@ namespace PMS.Controllers
 {
     public class PlacementAllocationController : Controller
     {
-       IPlacementAllocationBLL _placementAllocationBLL;
+        IPlacementAllocationBLL _placementAllocationBLL;
 
         public PlacementAllocationController(IPlacementAllocationBLL placementAllocationBLL)
         {
@@ -29,9 +29,28 @@ namespace PMS.Controllers
         [HttpPost]
         public IActionResult Allocate(List<StudentDto> studentDtoList)
         {
-           int? pId =  HttpContext.Session.GetInt32("placementDriveId");
-            _placementAllocationBLL.AllocatePlacementDriveToStudent(studentDtoList, pId??0);
+            int? pId = HttpContext.Session.GetInt32("placementDriveId");
+            _placementAllocationBLL.AllocatePlacementDriveToStudent(studentDtoList, pId ?? 0);
             return RedirectToAction("PlacementDriveList", "PlacementDrive");
         }
+
+        public IActionResult AllocatedStudentsList(int id)
+        {
+
+            var allocatedstudents = _placementAllocationBLL.GetAllAllocatedStudent(id);
+            return View(allocatedstudents);
+        }
+        //public IActionResult InterviewComments(int placementAllocationId, string feedback, string note)
+        //{
+        //    _placementAllocationBLL.InterviewComments(placementAllocationId, feedback, note);
+        //    return View(InterviewComments);
+
+        //}
+        public IActionResult InterviewComments()
+        {
+            return View();
+        }
+
+
     }
 }

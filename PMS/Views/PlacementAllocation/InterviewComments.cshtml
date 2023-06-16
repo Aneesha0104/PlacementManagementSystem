@@ -46,26 +46,25 @@
                     @using (Html.BeginForm("InterviewComments", "PlacementAllocation", FormMethod.Post))
                     {
                         @Html.HiddenFor(x=>x.PlacementAllocationId)
-                        <div class="card-body">
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.CommentDto.CommentForStudent ,"Comment For Student")
-                                @Html.TextAreaFor(x => x.CommentDto.CommentForStudent, new { @class = "form-control",@placeholder="CommentForStudent",@required=true })
+                        <div class="form-group">
+                                @Html.LabelFor(model => model.CommentDto.CommentForStudent, "Comment For Student")
+                                @Html.TextAreaFor(x => x.CommentDto.CommentForStudent, new { @class = "form-control", @placeholder = "Comment For Student", @required = true })
                             </div>
+
                             <div class="form-group">
                                 @Html.LabelFor(model => model.CommentDto.CommentForOrg, "Comment For Org")
-                                @Html.TextAreaFor(x => x.CommentDto.CommentForOrg, new { @class = "form-control",@placeholder="CommentForOrg" })
+                                @Html.TextAreaFor(x => x.CommentDto.CommentForOrg, new { @class = "form-control", @placeholder = "Comment For Org" })
                             </div>
-                          @*  <div class="form-group">
-                                @Html.LabelFor(model => model.PlacementStatus, "Placement Status")
-                                @Html.EnumDropDownListFor("statusList",new SelectList(statusList,"Value","Text"),"--Select Status")
+
+                            <div class="form-group">
+                                <label>Placement Status:</label>
+                            <br />
+                                   
+                                    @Html.RadioButtonFor(x => x.PlacementStatus, (byte)PlacementStatus.PLACED) Placed
+                                    <br />
+                                    @Html.RadioButtonFor(x => x.PlacementStatus, (byte)PlacementStatus.REJECTED) Rejected
                             </div>
-                           *@
-                           @* <div class="form-group">
-                                @Html.LabelFor(model => model.CommentDto.CommentForOrg, "Comment For Org")
-                                @Html.GetEnumSelectList
-                            </div>*@
-                            
-                        </div>
+
                        
                         <!-- /.card-body -->
 

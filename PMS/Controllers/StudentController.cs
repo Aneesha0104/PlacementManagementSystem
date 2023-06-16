@@ -65,7 +65,7 @@ namespace PMS.Controllers
         [HttpPost]
         public IActionResult Register(StudentDto studentDto)
         {
-            if (ModelState.IsValid && studentDto != null)
+            if (studentDto != null)
             {
                 if (_userBLL.CheckUserAlreadyRegistered(studentDto.UserDto))
                 {

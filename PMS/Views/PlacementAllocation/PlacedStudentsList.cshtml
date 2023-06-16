@@ -1,7 +1,6 @@
-﻿@model IEnumerable<PMS.BOL.PlacementAllocationDto>
-
+﻿@model IEnumerable<PMS.BOL.PlacementAllocationDto>;
 @{
-    ViewBag.Title = "AllocatedStudentsList";
+    ViewBag.Title = "PlacedStudentsList";
 }
 <!-- Content Wrapper. Contains page content -->
 <div>
@@ -9,13 +8,13 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6"> 
-                    <h1> allocated Students</h1>
+                <div class="col-sm-6">
+                    <h1>Students</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Allocated students</li>
+                        <li class="breadcrumb-item active">PlacedStudents</li>
                     </ol>
                 </div>
             </div>
@@ -34,31 +33,29 @@
                             <table id="dynamic-table" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th>Register No.</th>
                                         <th>Name</th>
-                                        <th>college Name</th>
-                                        <th>Interview</th>
-                                        
-                                        
+                                        <th>Gender</th>
+                                        <th>Dob</th>
+                                        <th>Mobile No.</th>
+                                        <th>Email Id</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
-                                           
-                                            <td>@item.StudentDto?.Name</td>
-                                            <td>@item.StudentDto?.DepartmentDto?.CollegeDto?.CollegeName</td>
-                                            @if (item.PlacementStatus == (byte)PMS.BOL.PMSEnums.PlacementStatus.ALLOCATED)
-                                            {
-                                                <td>
-                                                    <a class="btn btn-primary"href="@Url.Action("InterviewComments","PlacementAllocation",new { id = @item.PlacementAllocationId})">Interview</a>                                         
-                                                </td>
-                                            }
-                                            else
-                                            {
-                                                <td><span class="badge bg-success">@item.PlacementStatus </span> </td>
-                                            }
-                                        </tr>
+                                        @if (item.PlacementStatus == (byte)PMS.BOL.PMSEnums.PlacementStatus.ALLOCATED)
+                                        {
+                                            <tr>
+                                                <td>@item.StudentDto.RegisterNo</td>
+                                                <td>@item.StudentDto.Name</td>
+                                                <td>@item.StudentDto.Gender</td>
+                                                <td>@item.StudentDto.Dob</td>
+                                                <td>@item.StudentDto.MobileNo</td>
+                                                <td>@item.StudentDto.EmailId</td>
+
+                                            </tr>
+                                        }
                                     }
                                 </tbody>
                             </table>
@@ -86,4 +83,3 @@
         });
     </script>
 }
-

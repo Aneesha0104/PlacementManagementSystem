@@ -18,10 +18,14 @@ namespace PMS.BLL
     {
         IPlacementAllocationRepository _placementAllocationRepository;
         IStudentRepository _studentRepository;
-        public PlacementAllocationBLL(IPlacementAllocationRepository placementAllocationRepository,IStudentRepository studentRepository)
+        ICollegeRepository _collegeRepository;
+        ICompanyRepository _companyRepository;
+        public PlacementAllocationBLL(IPlacementAllocationRepository placementAllocationRepository,IStudentRepository studentRepository,ICompanyRepository companyRepository,ICollegeRepository collegeRepository)
         {
             _placementAllocationRepository = placementAllocationRepository;
             _studentRepository = studentRepository;
+            _collegeRepository = collegeRepository;
+            _companyRepository = companyRepository;
         }
 
         public PlacementAllocationDto GetPlacementAllocationByPlacementAllocationId(int placementAllocationId)
@@ -62,7 +66,20 @@ namespace PMS.BLL
             return placementAllocationDto;
         }
 
-       
+        public PlacementAllocationDto GetPlacementAllocationByCollegeId(int collegeId)
+        {
+            var placementAllocation = _placementAllocationRepository.FirstOrDefault(x => x.PlacementDrive.CollegeId == collegeId);
+            var placementAllocationDto = new PlacementAllocationDto();
+            if (placementAllocation != null)
+            {
+                
+                CopyToDto(placementAllocation, placementAllocationDto);
+            }
+            return placementAllocationDto;
+
+        }
+
+
 
         public void InterviewComments(PlacementAllocationDto placementAlctnnDto)
         {
@@ -72,7 +89,8 @@ namespace PMS.BLL
             {
                 placementAllocation.Comment = placementAllocation.Comment ?? new Comment();
                 placementAllocation.Comment.CommentForOrg = placementAlctnnDto.CommentDto.CommentForOrg;
-
+                placementAllocation.Comment.CommentForStudent = placementAlctnnDto.CommentDto.CommentForStudent;
+                placementAllocation.PlacementStatus = placementAlctnnDto.PlacementStatus;
                 _placementAllocationRepository.Update(placementAllocation);
                 
             }        
@@ -156,14 +174,7 @@ namespace PMS.BLL
             }
             return placementAllocationDtoList;
         }
-        //public List<PlacementAllocationDto>GetAllPlacedStudentsByCollegeId(int collegeId)
-        //{
-        //    var placedStudents = _placementAllocationRepository.FirstOrDefault(x => x.PlacementDrive.CollegeId == collegeId, include: x => x.Include(y => y.Student));
-        //    var placementAllocationDto = new PlacementAllocationDto();
-        //    if (placedStudents != null) CopyToDto(placedStudents, placementAllocationDto);
-        //    return placementAllocationDto;
-
-        //}
+       
 
         
         
@@ -189,7 +200,8 @@ namespace PMS.BLL
             target.StudentDto = new StudentDto { DepartmentDto = new DepartmentDto { CollegeDto = new CollegeDto() } };
             target.StudentDto.Name = source.Student?.Name;
             target.PlacementDriveDto = new PlacementDriveDto { CompanyDto = new CompanyDto() };
-            target.PlacementDriveDto.CompanyDto.Name = source.PlacementDrive.Company.Name;
+            target.PlacementDriveDto.CompanyDto.Name = source.PlacementDrive.Company?.Name;
+           
             target.StudentDto.DepartmentDto.CollegeDto.CollegeName = source.Student?.Department?.College?.CollegeName;
 
 

@@ -38,7 +38,7 @@ namespace PMS.Controllers
             var loggedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
             var placedStatus = _placementAllocationBLL.GetPlacementAllocationByStudentId(loggedInUser.StudentId);
 
-           
+
 
             return View(placedStatus);
         }
@@ -48,14 +48,12 @@ namespace PMS.Controllers
             var allocatedstudents = _placementAllocationBLL.GetAllAllocatedStudent(id);
             return View(allocatedstudents);
         }
-        
-        public IActionResult InterviewComments(int placementAllocationId)
+
+        public IActionResult InterviewComments(int id)
         {
-             var statusList=Enum.GetValues(typeof(PlacementStatus)).Cast<PlacementStatus>().ToList();
-            ViewBag.StatusList=statusList;
-      //    ViewBag.statusList = new SelectList(_placementAllocationBLL.GetAllPlacementAllocationbll(), "PlacementStatus");
+
             PlacementAllocationDto placementAllocationDto = new PlacementAllocationDto();
-            placementAllocationDto.PlacementAllocationId = placementAllocationId;
+            placementAllocationDto.PlacementAllocationId = id;
             return View(placementAllocationDto);
         }
         [HttpPost]
@@ -66,7 +64,24 @@ namespace PMS.Controllers
                 _placementAllocationBLL.InterviewComments(placementAllocationDto);
                 return RedirectToAction("AllocatedStudentsList");
             }
-            return View();
+            var allocatedstudents = _placementAllocationBLL.GetAllAllocatedStudent(placementAllocationDto.PlacementDriveId);
+
+            return View("AllocatedStudentsList", allocatedstudents);
+        }
+
+        public IActionResult PlacedStudentsList(int CollegeId)
+        {
+            var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+            var studentList = _placementAllocationBLL.GetPlacementAllocationByCollegeId(loogedInUser.CollegeDto.CollegeId);
+
+
+            return View(PlacedStudentsList);
+        }
+
+        public IActionResult AllPlacedStudentsList()
+        {
+            var AllPlacedStudentsList=_placementAllocationBLL.GetAllPlacedStudents();
+            return View(AllPlacedStudentsList);
         }
     }
 }

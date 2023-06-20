@@ -49,18 +49,11 @@ namespace PMS.BLL
 
         public PlacementAllocationDto GetPlacementAllocationByStudentId(int studentId)
         {
-            var placementAllocation = _placementAllocationRepository.GetAll(x => x.StudentId == studentId);
+            var placementAllocation = _placementAllocationRepository.FirstOrDefault(x=>x.StudentId==studentId,include:x=>x.Include(y=>y.PlacementDrive));
             var placementAllocationDto = new PlacementAllocationDto();
             if (placementAllocation != null)
-            {foreach(var placement in placementAllocation)
-
-
-                {
-                    var placementallocationDto = new PlacementAllocationDto();
-                    CopyToDto(placement, placementAllocationDto);
-
-
-                }
+            {               
+             CopyToDto(placementAllocation, placementAllocationDto);                
             }
                
             return placementAllocationDto;
@@ -99,9 +92,6 @@ namespace PMS.BLL
        
 
 
-        
-        
-
         public List<PlacementAllocationDto> GetAllPlacementAllocationbll()
         {
             var placementAllocation = _placementAllocationRepository.GetAll(x => x.PlacementStatus == (byte)PMSEnums.RecordStatus.ACTIVE, x => x.Student, x => x.PlacementDrive);
@@ -117,6 +107,8 @@ namespace PMS.BLL
             }
             return placementAllocationDtoList;
         }
+        
+        
         public List<PlacementAllocationDto> GetAllAllocatedStudent(int placementDriveId)
         {
             var placementAllocation = _placementAllocationRepository.GetAll(x => x.PlacementDriveId == placementDriveId, x => x.Student, x => x.PlacementDrive, x => x.PlacementDrive.Company
@@ -133,6 +125,8 @@ namespace PMS.BLL
             }
             return placementAllocationDtoList;
         }
+        
+        
         public bool AllocatePlacementDriveToStudent(List<StudentDto> studentDto, int pId)
         {
             bool bRet = false;
@@ -159,6 +153,8 @@ namespace PMS.BLL
 
             return bRet;
         }
+        
+        
         public List<PlacementAllocationDto> GetAllPlacedStudents()
         {
             var placementAllocation = _placementAllocationRepository.GetAll(x => x.PlacementStatus == (byte)PMSEnums.PlacementStatus.PLACED, x => x.Student, x => x.PlacementDrive);

@@ -33,15 +33,7 @@ namespace PMS.Controllers
             return RedirectToAction("PlacementDriveList", "PlacementDrive");
         }
 
-        public IActionResult PlacedStatus(int studentId)
-        {
-            var loggedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
-            var placedStatus = _placementAllocationBLL.GetPlacementAllocationByStudentId(loggedInUser.StudentId);
-
-
-
-            return View(placedStatus);
-        }
+     
         public IActionResult AllocatedStudentsList(int id)
         {
 
@@ -69,19 +61,6 @@ namespace PMS.Controllers
             return View("AllocatedStudentsList", allocatedstudents);
         }
 
-        public IActionResult PlacedStudentsList(int CollegeId)
-        {
-            var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
-            var studentList = _placementAllocationBLL.GetPlacementAllocationByCollegeId(loogedInUser.CollegeDto.CollegeId);
-
-
-            return View(PlacedStudentsList);
-        }
-
-        public IActionResult AllPlacedStudentsList()
-        {
-            var AllPlacedStudentsList=_placementAllocationBLL.GetAllPlacedStudents();
-            return View(AllPlacedStudentsList);
-        }
+      
     }
 }

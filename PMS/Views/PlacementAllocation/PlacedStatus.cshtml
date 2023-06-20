@@ -15,7 +15,7 @@ ViewBag.Title = "PlacedStatus";
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active">Placed Students</li>
+                                    <li class="breadcrumb-item active">Placement Status</li>
                             </ol>
                         </div>
                </div>
@@ -34,7 +34,9 @@ ViewBag.Title = "PlacedStatus";
                                         <tr>
                                             <th>Name</th>
                                             <th>Company</th>
+                                            <th>Placement Drive</th>
                                             <th>Placement status</th>
+                                            <th>Comment By Org</th>
                                         </tr>
                                     </thead>
                                 <tbody>
@@ -43,7 +45,9 @@ ViewBag.Title = "PlacedStatus";
                                         <tr>
                                             <td>@item.StudentDto?.Name</td>
                                             <td>@item.PlacementDriveDto?.CompanyDto?.Name</td>
+                                            <td>@item.PlacementDriveDto?.Title</td>
                                             <td>@item.PlacementStatus</td>
+                                            <td>@item.CommentDto.CommentForStudent</td>
                                         </tr>
                                      }
                                 </tbody>

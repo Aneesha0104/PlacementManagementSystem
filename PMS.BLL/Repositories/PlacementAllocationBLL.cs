@@ -116,25 +116,8 @@ namespace PMS.BLL
             }
             return placementAllocationDtoList;
         }
-
-        public List<PlacementAllocationDto> GetAllPlacedStudentsList(int companyId)
-        {
-            var placementAllocation = _placementAllocationRepository.GetAll(x=>x.PlacementDrive.CompanyId==companyId &&  x.PlacementStatus == (byte)PMSEnums.PlacementStatus.PLACED, x => x.Student, x => x.PlacementDrive,x=> x.Student.Department,
-                                         x => x.Student.Department.College,x=>x.Comment);
-            var AllPlacedStudentsList = new List<PlacementAllocationDto>();
-            if (placementAllocation != null) 
-            {
-                foreach (var item in placementAllocation)
-                {
-                    var placementAllocationDto = new PlacementAllocationDto();
-                    CopyToDto(item, placementAllocationDto);
-                    AllPlacedStudentsList.Add(placementAllocationDto);
-                }
-            }
-            return AllPlacedStudentsList;
-        }
-
-
+        
+        
         public List<PlacementAllocationDto> GetAllAllocatedStudent(int placementDriveId)
         {
             var placementAllocation = _placementAllocationRepository.GetAll(x => x.PlacementDriveId == placementDriveId, x => x.Student, x => x.PlacementDrive, x => x.PlacementDrive.Company
@@ -181,8 +164,21 @@ namespace PMS.BLL
         }
         
         
-        
-        
+        public List<PlacementAllocationDto> GetAllPlacedStudents()
+        {
+            var placementAllocation = _placementAllocationRepository.GetAll(x => x.PlacementStatus == (byte)PMSEnums.PlacementStatus.PLACED, x => x.Student, x => x.PlacementDrive);
+            var placementAllocationDtoList = new List<PlacementAllocationDto>();
+            if (placementAllocation != null) { }
+            {
+                foreach (var item in placementAllocation)
+                {
+                    var placedStudentsList = new PlacementAllocationDto();
+                    CopyToDto(item, placedStudentsList);
+                    placementAllocationDtoList.Add(placedStudentsList);
+                }
+            }
+            return placementAllocationDtoList;
+        }
        
 
         

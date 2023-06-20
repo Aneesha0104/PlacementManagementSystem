@@ -14,7 +14,7 @@ namespace PMS.BLL
         public void InterviewComments(PlacementAllocationDto placementAlctnnDto);
 
         public List<PlacementAllocationDto> GetPlacementAllocationByCollegeId(int collegeId);
-        public List<PlacementAllocationDto> GetAllPlacedStudentsList(int companyId);
+        public List<PlacementAllocationDto> GetAllPlacedStudents();
 
 
 

@@ -41,8 +41,6 @@ namespace PMS.Controllers
             return View(allocatedstudents);
         }
 
-        
-
         public IActionResult InterviewComments(int id)
         {
 
@@ -78,15 +76,5 @@ namespace PMS.Controllers
             
             return View(studentList);
         }
-
-        public IActionResult AllPlacedStudentsList(int companyId)
-        {
-
-            var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
-           
-            var placedStudents = _placementAllocationBLL.GetAllPlacedStudentsList(loogedInUser.CompanyDto.CompanyId);
-            return View(placedStudents);
-        }
-
     }
 }

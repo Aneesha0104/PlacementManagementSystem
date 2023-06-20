@@ -33,9 +33,10 @@
                             <table id="dynamic-table" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Register No.</th>
+                                       
                                         <th>Name</th>
                                         <th>Company Name</th>
+                                        <th>Placement Drive</th>
                                         <th>Placement Status</th>                                       
                                        
                                     </tr>
@@ -44,9 +45,10 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>@item.StudentDto.RegisterNo</td>
+                                            
                                             <td>@item.StudentDto.Name</td>
                                             <td>@item.PlacementDriveDto.CompanyDto.Name</td>
+                                            <td>@item.PlacementDriveDto.Title</td>
                                             <td>@item.PlacementStatus</td>
                                             
                                         </tr>

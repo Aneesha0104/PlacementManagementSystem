@@ -12,8 +12,8 @@ namespace PMS.BLL
         bool AllocatePlacementDriveToStudent(List<StudentDto> studentDto, int pId);
         List<PlacementAllocationDto> GetAllAllocatedStudent(int placementDriveId);
         public void InterviewComments(PlacementAllocationDto placementAlctnnDto);
-        
-        public PlacementAllocationDto GetPlacementAllocationByCollegeId(int collegeId);
+
+        public List<PlacementAllocationDto> GetPlacementAllocationByCollegeId(int collegeId);
         public List<PlacementAllocationDto> GetAllPlacedStudents();
 
 

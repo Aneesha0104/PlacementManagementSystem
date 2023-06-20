@@ -47,13 +47,18 @@ namespace PMS.BLL
             return placementAllocationDto;
         }
 
-        public PlacementAllocationDto GetPlacementAllocationByStudentId(int studentId)
+        public List<PlacementAllocationDto> GetPlacementAllocationByStudentId(int studentId)
         {
-            var placementAllocation = _placementAllocationRepository.FirstOrDefault(x=>x.StudentId==studentId,include:x=>x.Include(y=>y.PlacementDrive));
-            var placementAllocationDto = new PlacementAllocationDto();
+            var placementAllocation = _placementAllocationRepository.GetAll(x=>x.StudentId==studentId,x=>x.PlacementDrive, x=>x.PlacementDrive.Company);
+            var placementAllocationDto = new List<PlacementAllocationDto>();
             if (placementAllocation != null)
-            {               
-             CopyToDto(placementAllocation, placementAllocationDto);                
+            {
+                foreach (var item in placementAllocation)
+                {
+                    var placement=new PlacementAllocationDto();
+                    CopyToDto(item, placement);
+                    placementAllocationDto.Add(placement);
+                }
             }
                
             return placementAllocationDto;
@@ -61,7 +66,7 @@ namespace PMS.BLL
 
         public PlacementAllocationDto GetPlacementAllocationByCollegeId(int collegeId)
         {
-            var placementAllocation = _placementAllocationRepository.FirstOrDefault(x => x.PlacementDrive.CollegeId == collegeId);
+            var placementAllocation = _placementAllocationRepository.FirstOrDefault(x => x.PlacementDrive.CollegeId == collegeId,include:x=>x.Include(y=>y.PlacementDrive.Company));
             var placementAllocationDto = new PlacementAllocationDto();
             if (placementAllocation != null)
             {

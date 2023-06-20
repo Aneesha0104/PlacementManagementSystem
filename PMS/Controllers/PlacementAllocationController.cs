@@ -61,6 +61,11 @@ namespace PMS.Controllers
             return View("AllocatedStudentsList", allocatedstudents);
         }
 
-      
+        public IActionResult PlacedStatus(int studentId)
+        {
+            var LoogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+            var placedStatus = _placementAllocationBLL.GetPlacementAllocationByStudentId(LoogedInUser.StudentId);
+            return View(placedStatus);
+        }
     }
 }

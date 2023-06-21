@@ -41,6 +41,8 @@ namespace PMS.Controllers
             return View(allocatedstudents);
         }
 
+        
+
         public IActionResult InterviewComments(int id)
         {
 
@@ -64,8 +66,27 @@ namespace PMS.Controllers
         public IActionResult PlacedStatus(int studentId)
         {
             var LoogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
-            var placedStatus = _placementAllocationBLL.GetPlacementAllocationByStudentId(LoogedInUser.StudentId);
+            var placedStatus = _placementAllocationBLL.GetPlacementAllocationByStudentId(LoogedInUser.StudentDto.StudentId);
             return View(placedStatus);
         }
+
+        public IActionResult PlacedStudentsList(int collegeId)
+        {
+            var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+            var studentList = _placementAllocationBLL.GetPlacementAllocationByCollegeId(loogedInUser.CollegeDto.CollegeId);
+
+            
+            return View(studentList);
+        }
+
+        public IActionResult AllPlacedStudentsList(int companyId)
+        {
+
+            var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+           
+            var placedStudents = _placementAllocationBLL.GetAllPlacedStudentsList(loogedInUser.CompanyDto.CompanyId);
+            return View(placedStudents);
+        }
+
     }
 }

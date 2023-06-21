@@ -213,7 +213,7 @@ namespace PMS.BLL
             target.PlacementDriveDto.Title = source.PlacementDrive.Title;
             target.PlacementDriveDto.CompanyDto.Name = source.PlacementDrive.Company?.Name;
             target.CommentDto = new CommentDto();
-            target.CommentDto.CommentForStudent = source.Comment.CommentForStudent;
+            target.CommentDto.CommentForStudent = source.Comment?.CommentForStudent;
             target.StudentDto.DepartmentDto.CollegeDto.CollegeName = source.Student?.Department?.College?.CollegeName;
 
 

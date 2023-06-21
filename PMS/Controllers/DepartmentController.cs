@@ -14,7 +14,8 @@ namespace PMS.Controllers
         }
         public IActionResult Index()
         {
-            var departmentList = _departmentBll.GetAllDepartmentBll();
+            var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+            var departmentList = _departmentBll.GetDepartmentunderCollege(loogedInUser.CollegeDto.CollegeId);
             return View(departmentList);
         }
 
@@ -58,5 +59,12 @@ namespace PMS.Controllers
             ViewBag.ErrorCnfMsg = ModelState["UserDto.ConfirmPassword"]?.Errors[0].ErrorMessage;    
             return View();
         }
+        public IActionResult Delete(int id)
+        {
+            _departmentBll.DeleteDeparment(id);
+            return RedirectToAction("Index");
+        }
     }
 }
+
+   

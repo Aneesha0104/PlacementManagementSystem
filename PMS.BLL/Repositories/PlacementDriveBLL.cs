@@ -25,7 +25,7 @@ namespace PMS.BLL
 
         public List<PlacementDriveDto> GetPlacementDriveByCompanyId(int companyId)
         {
-            var drives = _placementDriveRepository.GetAll(x => x.CompanyId == companyId);
+            var drives = _placementDriveRepository.GetAll(x => x.CompanyId == companyId,x=>x.College);
             var driveDtoList = new List<PlacementDriveDto>();
 
             if (drives != null)
@@ -42,15 +42,23 @@ namespace PMS.BLL
             return driveDtoList;
         }
 
-        public PlacementDriveDto GetPlacementDriveByCollegeId(int collegeId)
+        public List<PlacementDriveDto> GetPlacementDriveByCollegeId(int collegeId)
         {
-            var placementdrive = _placementDriveRepository.FirstOrDefault(x => x.CollegeId == collegeId, include: x => x.Include(Y => Y.College));
-            var placementdriveDto = new PlacementDriveDto();
-            if (placementdrive != null) CopyToDto(placementdrive, placementdriveDto);
+            var placementdrive = _placementDriveRepository.GetAll(x => x.CollegeId == collegeId && x.Status == (byte)PMSEnums.RecordStatus.ACTIVE,x=>x.College,x=>x.Company);
+            var placementdriveDto = new List<PlacementDriveDto>();
+            if (placementdrive != null)
+            {
+                foreach (var item in placementdrive)
+                {
+                    var placement = new PlacementDriveDto();
+                    CopyToDto(item, placement);
+                    placementdriveDto.Add(placement);
+                }
+            }
+
             return placementdriveDto;
+
         }
-       
-       
 
 
         public List<PlacementDriveDto> GetAllPlacementDrivebll()
@@ -89,12 +97,29 @@ namespace PMS.BLL
                 return false;
             }
         }
-        public bool DeletePlacementDrive(int placementdriveId)
+        public bool InactivePlacementDrive(int placementdriveId)
         {
             try
             {
                 var placementdrive = _placementDriveRepository.FirstOrDefault(x => x.PlacementDriveId == placementdriveId);
-                placementdrive.Status = (byte)PMSEnums.RecordStatus.DELETE;
+                placementdrive.Status = (byte)PMSEnums.RecordStatus.INACTIVE;
+               
+                _placementDriveRepository.Update(placementdrive);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool ActivePlacementDrive(int placementdriveId)
+        {
+            try
+            {
+                var placementdrive = _placementDriveRepository.FirstOrDefault(x => x.PlacementDriveId == placementdriveId);
+                placementdrive.Status = (byte)PMSEnums.RecordStatus.ACTIVE;
+
                 _placementDriveRepository.Update(placementdrive);
                 return true;
             }

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<PMS.BOL.PlacementDriveDto>;
 @{
-    ViewBag.Title = "PlacementDrive";
+    ViewBag.Title = "indexList";
 }
 <!-- Content Wrapper. Contains page content -->
 <div>
@@ -9,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>College</h1>
+                    <h1>PlacementDrives</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">PlacementDrive</li>
+                        <li class="breadcrumb-item active">PlacementDrives</li>
                     </ol>
                 </div>
             </div>
@@ -36,12 +36,14 @@
                                 <thead>
                                     <tr>
                                         <th>InterviewDate</th>
-                                        <th>CollegeId</th>
+                                        <th>College</th>
                                         <th>No of Vacancies</th>
                                         <th>Package</th>
                                         <th>Place</th>
                                         <th>Title</th>
                                         <th>Details</th>
+                                        <th>Edit</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -58,8 +60,29 @@
                                            
                                             <td class="project-actions text-right">
                                                 <a class="btn btn-info btn-sm" href="@Url.Action("Edit","PlacementDrive",new { id = @item.PlacementDriveId })"><i class="fas fa-pencil-alt">  </i> Edit </a>
-                                                <a class="btn btn-danger btn-sm" href="@Url.Action("Delete","PlacememtDrive",new { id = @item.PlacementDriveId })"><i class="fas fa-trash"> </i>Delete</a>
+                                               
                                             </td>
+                                            <td class="project-actions text-right">
+                                                <a class="btn btn-success btn-sm" href="@Url.Action("Active","PlacementDrive",new { id = @item.PlacementDriveId })"><i class="fas fa-check">  </i> Active </a>
+                                                 <a class="btn btn-danger btn-sm" href="@Url.Action("Inactive","PlacementDrive",new { id = @item.PlacementDriveId })"><i class="fas fa-ban">  </i> Inactive </a>
+                                            </td>
+                                             <td>
+                                                @if (item.Status==(byte)PMS.BOL.PMSEnums.RecordStatus.ACTIVE)
+                                                {
+                                                    <span class="badge bg-primary">
+                                                        @PMS.BOL.PMSEnums.GetTextValue((PMS.BOL.PMSEnums.RecordStatus)item.Status)
+                                                    </span>
+                                                }
+                                                 @if (item.Status == (byte)PMS.BOL.PMSEnums.RecordStatus.INACTIVE)
+                                                {
+                                                    <span class="badge bg-success">
+                                                        @PMS.BOL.PMSEnums.GetTextValue((PMS.BOL.PMSEnums.RecordStatus)item.Status)
+                                                    </span>
+                                                }
+                                                
+                                            </td>
+
+
                                         </tr>
                                     }
                                 </tbody>

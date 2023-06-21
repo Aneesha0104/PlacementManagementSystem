@@ -92,6 +92,21 @@ namespace PMS.BLL
             }
         }
 
+        public bool DeleteDeparment(int departmentId)
+        {
+            try
+            {
+                var department = _departmentRepository.FirstOrDefault(x => x.DepartmentId == departmentId);
+                department.Status = (byte)PMSEnums.RecordStatus.DELETE;
+                _departmentRepository.Update(department);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         void CopyFromDto(DepartmentDto source, Department target)
         {
             target.Name = source.Name;

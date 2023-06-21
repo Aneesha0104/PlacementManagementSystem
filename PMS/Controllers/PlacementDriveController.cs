@@ -27,7 +27,7 @@ namespace PMS.Controllers
 
             if (driveList == null)
             {
-                driveList = new List<PlacementDriveDto>(); // Create an empty list if the driveList is null
+                driveList = new List<PlacementDriveDto>(); 
             }
 
             return View(driveList);
@@ -35,10 +35,17 @@ namespace PMS.Controllers
         
 
 
-        public IActionResult Index()
+        public IActionResult Index(int companyId)
         {
-            var placementdriveList = _placementDriveBll.GetAllPlacementDrivebll();
-            return View(placementdriveList);
+            var loggedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+            var indexList = _placementDriveBll.GetPlacementDriveByCompanyId(loggedInUser.CompanyDto.CompanyId);
+
+            if (indexList == null)
+            {
+                indexList = new List<PlacementDriveDto>();
+            }
+
+            return View(indexList);
         }
         public IActionResult Edit(int id)
         {
@@ -83,15 +90,30 @@ namespace PMS.Controllers
             return View();
         }
 
-        public IActionResult PlacementDriveList()
+        public IActionResult PlacementDriveList(int collegeId)
         {
-            var placementDriveList = _placementDriveBll.GetAllPlacementDrivebll();
-            return View("PlacementDriveList",placementDriveList);
+            var loggedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+            var placementdriveList = _placementDriveBll.GetPlacementDriveByCollegeId(loggedInUser.CollegeDto.CollegeId);
+            return View(placementdriveList);
         }
 
-        
+        public IActionResult Inactive(int id)
+        {
+            _placementDriveBll.InactivePlacementDrive(id);
+            
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Active(int id)
+        {
+            _placementDriveBll.ActivePlacementDrive(id);
+
+            return RedirectToAction("Index");
+        }
+
+
     }
 
-    
+
 }
    

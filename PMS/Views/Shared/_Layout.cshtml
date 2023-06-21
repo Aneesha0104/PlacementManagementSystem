@@ -110,17 +110,20 @@
                         </form>
                     </div>
                 </li>
+                <!-- Messages Dropdown Menu -->
 
                 
 
 
 
-               @* <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
-                    </a>
+                <!-- Logout button -->
+                <li>
+                    <div class="nav-item">
+                        <a class="nav-link" href="@Url.ActionLink("Logout","Home")">
+                            <span class="badge bg-danger">Logout</span>
+                        </a>
+                    </div>
+                </li>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <a href="#" class="dropdown-item">
                             <!-- Message Start -->
@@ -171,10 +174,10 @@
                         </a>
                     </div>
                 </li>
-               @* <!-- Notifications Dropdown Menu -->
+                <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                @*        <i class="far fa-bell"></i>
+                      <i class="far fa-bell"></i>
                         <span class="badge badge-warning navbar-badge">15</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -207,7 +210,7 @@
                     <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
-                </li>*@
+                </li>
             </ul>
         </nav>
 
@@ -277,15 +280,7 @@
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="@Url.ActionLink("AllPlacedStudentsList","PlacementAllocation")" class="nav-link">
-                                    <i class="nav-icon fas fa-user-graduate"></i>
-                                    <p>
-                                        Placed Students
-                                        <span class="right badge badge-success">0</span>
-                                    </p>
-                                </a>
-                            </li>
+                            
 
                         </ul>
                     </nav>

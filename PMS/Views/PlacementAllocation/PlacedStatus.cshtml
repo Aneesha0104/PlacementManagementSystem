@@ -10,12 +10,12 @@ ViewBag.Title = "PlacedStatus";
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Placed Students</h1>
+                    <h1>My Placement Status</h1>
                 </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active">Placement Status</li>
+                                    <li class="breadcrumb-item active"> My Placement Status</li>
                             </ol>
                         </div>
                </div>
@@ -46,7 +46,26 @@ ViewBag.Title = "PlacedStatus";
                                             <td>@item.StudentDto?.Name</td>
                                             <td>@item.PlacementDriveDto?.CompanyDto?.Name</td>
                                             <td>@item.PlacementDriveDto?.Title</td>
-                                            <td>@item.PlacementStatus</td>
+                                            <td>
+                                                @if (item.PlacementStatus == (byte)PMS.BOL.PMSEnums.PlacementStatus.ALLOCATED)
+                                                {
+                                                    <span class="badge bg-primary">
+                                                        @PMS.BOL.PMSEnums.GetTextValue((PMS.BOL.PMSEnums.PlacementStatus)item.PlacementStatus)
+                                                    </span>
+                                                }
+                                                 @if (item.PlacementStatus == (byte)PMS.BOL.PMSEnums.PlacementStatus.PLACED)
+                                                {
+                                                    <span class="badge bg-success">
+                                                        @PMS.BOL.PMSEnums.GetTextValue((PMS.BOL.PMSEnums.PlacementStatus)item.PlacementStatus)
+                                                    </span>
+                                                }
+                                                 @if (item.PlacementStatus == (byte)PMS.BOL.PMSEnums.PlacementStatus.REJECTED)
+                                                {
+                                                    <span class="badge bg-danger">
+                                                        @PMS.BOL.PMSEnums.GetTextValue((PMS.BOL.PMSEnums.PlacementStatus)item.PlacementStatus)
+                                                    </span>
+                                                }
+                                            </td>
                                             <td>@item.CommentDto.CommentForStudent</td>
                                         </tr>
                                      }

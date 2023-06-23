@@ -88,5 +88,12 @@ namespace PMS.Controllers
             return View(placedStudents);
         }
 
+        public IActionResult PlacedStudentCount()
+       {
+            int placedStudentCount = _placementAllocationBLL.GetPlacedStudentsCount();
+            ViewData["PlacedStudentCount"] = placedStudentCount;
+            return View();
+        }
+
     }
 }

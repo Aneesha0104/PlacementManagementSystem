@@ -13,5 +13,6 @@ namespace PMS.BLL
         public bool InactivePlacementDrive(int placementdriveId);
         public bool ActivePlacementDrive(int placementdriveId);
         bool CreatePlacementDrive(PlacementDriveDto placementDriveDto);
+        public int GetPlacementDriveCount();
     }
 }

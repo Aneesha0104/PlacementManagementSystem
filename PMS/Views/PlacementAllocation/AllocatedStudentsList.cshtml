@@ -48,16 +48,25 @@
                                            
                                             <td>@item.StudentDto?.Name</td>
                                             <td>@item.StudentDto?.DepartmentDto?.CollegeDto?.CollegeName</td>
+                                            <td>
                                             @if (item.PlacementStatus == (byte)PMS.BOL.PMSEnums.PlacementStatus.ALLOCATED)
-                                            {
-                                                <td>
-                                                    <a class="btn btn-primary"href="@Url.Action("InterviewComments","PlacementAllocation",new { id = @item.PlacementAllocationId})">Interview</a>                                         
-                                                </td>
+                                            {                                              
+                                                <a class="btn btn-primary"href="@Url.Action("InterviewComments","PlacementAllocation",new { id = @item.PlacementAllocationId})">Interview</a>                                         
+                                                
                                             }
-                                            else
+                                            @if (item.PlacementStatus == (byte)PMS.BOL.PMSEnums.PlacementStatus.PLACED)
                                             {
-                                                <td><span class="badge bg-success">@item.PlacementStatus </span> </td>
+                                                <span class="badge bg-success">
+                                                     @PMS.BOL.PMSEnums.GetTextValue((PMS.BOL.PMSEnums.PlacementStatus)item.PlacementStatus)
+                                                </span>
                                             }
+                                            @if (item.PlacementStatus == (byte)PMS.BOL.PMSEnums.PlacementStatus.REJECTED)
+                                            {
+                                                  <span class="badge bg-danger">
+                                                     @PMS.BOL.PMSEnums.GetTextValue((PMS.BOL.PMSEnums.PlacementStatus)item.PlacementStatus)
+                                                  </span>
+                                            }
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>

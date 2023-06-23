@@ -25,7 +25,7 @@ namespace PMS.BLL
 
         public List<PlacementDriveDto> GetPlacementDriveByCompanyId(int companyId)
         {
-            var drives = _placementDriveRepository.GetAll(x => x.CompanyId == companyId,x=>x.College);
+            var drives = _placementDriveRepository.GetAll(x => x.CompanyId == companyId && x.Status == (byte)PMSEnums.RecordStatus.ACTIVE, x=>x.College);
             var driveDtoList = new List<PlacementDriveDto>();
 
             if (drives != null)
@@ -142,6 +142,16 @@ namespace PMS.BLL
                 return false;
             }
         }
+
+        public int GetPlacementDriveCount()
+        {
+            return _placementDriveRepository.GetRecordCount(u => u.Status == (byte)PMSEnums.RecordStatus.ACTIVE);
+        }
+
+        
+
+
+
         #region Copy 
         void CopyFromDto(PlacementDriveDto source, PlacementDrive target)
         {

@@ -105,7 +105,7 @@ namespace PMS.Controllers
         public IActionResult StudentCount()
         {
             int studentCount = _userBLL.GetStudentCount();
-            ViewData["StudentCount"] = studentCount;A
+            ViewData["StudentCount"] = studentCount;
             return View();
         }
 

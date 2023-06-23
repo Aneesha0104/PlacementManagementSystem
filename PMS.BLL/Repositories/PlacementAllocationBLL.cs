@@ -179,16 +179,20 @@ namespace PMS.BLL
 
             return bRet;
         }
-        
-        
-        
-        
-       
 
-        
-        
+        public int GetPlacedStudentsCount()
+        {
+            return _placementAllocationRepository.GetRecordCount(u => u.PlacementStatus == (byte)PMSEnums.PlacementStatus.PLACED);
+        }
 
-        
+
+
+
+
+
+
+
+
 
 
 

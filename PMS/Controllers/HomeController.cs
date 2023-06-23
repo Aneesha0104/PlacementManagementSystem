@@ -17,19 +17,22 @@ namespace PMS.Controllers
         ICollegeBLL _collegeBLL;
         ICompanyBLL _companyBLL;
         IStudentBLL _studentBLL;
-        public HomeController(ILogger<HomeController> logger, IUserBLL userBLL,ICollegeBLL collegeBLL,ICompanyBLL companyBLL, IStudentBLL studentBLL)
+        IPlacementAllocationBLL _placementAllocationBLL;
+        public HomeController(ILogger<HomeController> logger, IUserBLL userBLL,ICollegeBLL collegeBLL,ICompanyBLL companyBLL, IStudentBLL studentBLL,IPlacementAllocationBLL placementAllBLL)
         {
             _logger = logger;
             _userBLL = userBLL;
             _collegeBLL = collegeBLL;
             _companyBLL= companyBLL;
             _studentBLL = studentBLL;
+            _placementAllocationBLL = placementAllBLL;
         }
 
         public IActionResult Index()
         {
-           // ViewBag.userDetails = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
-            return View();
+            var loggedInUser =HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+            loggedInUser.PlacedStudentCount= PlacedStudentCount();
+            return View(loggedInUser);
         }
 
         public IActionResult Privacy()
@@ -102,6 +105,12 @@ namespace PMS.Controllers
             return RedirectToAction("Login", "Home");
         }
 
+        private int PlacedStudentCount()
+        {
+            var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+            int collegeId = loogedInUser.CollegeDto?.CollegeId ?? 0;
+            return _placementAllocationBLL.GetPlacedStudentsCount(collegeId);
+        }
         public IActionResult StudentCount()
         {
             int studentCount = _userBLL.GetStudentCount();

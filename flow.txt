@@ -1,0 +1,30 @@
+Placement portal workflow
+
+ADMIN:
+>Registers/Deletes/Edits college and Company details to the portal.(provides them username and password)
+
+COLLEGE:
+>creates/edits/deletes departments
+>Can view placement drive and allocate students to drives
+>Can view all the students who have registered to college
+>Can view placement status of students
+
+STUDENT:
+>View their Placement status
+>edit and view their profile(pending)
+
+COMPANY:
+>Creat/edit/delete placement drives
+>View students for each drive,interview themand provide feedback and update placementStatus
+>View list of students placed in their company
+
+
+
+
+
+Problems/Incomplete
+>Deleting Department.-pending
+>Department refleccting in all colleges.Not reflecting in student registration form-rectified
+>Student profile back end-pending
+>Placement drive is visible to all college regardless of college chosen by company-rectified
+>delete placement Drive-pending

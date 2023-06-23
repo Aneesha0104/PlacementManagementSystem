@@ -13,6 +13,7 @@ namespace PMS.BOL
         public CollegeDto CollegeDto { get; set; }
         public byte UserType { get; set; }
         public string UserName{ get; set; }
+        public int PlacedStudentCount { get; set; }
         
     }
 }

@@ -101,5 +101,19 @@ namespace PMS.Controllers
             HttpContext.Session.Remove("LoggedInUser"); ;
             return RedirectToAction("Login", "Home");
         }
+
+        public IActionResult StudentCount()
+        {
+            int studentCount = _userBLL.GetStudentCount();
+            ViewData["StudentCount"] = studentCount;A
+            return View();
+        }
+
+        public IActionResult CompanyCount()
+        {
+            int companyCount = _userBLL.GetCompanyCount();
+            ViewData["CompanyCount"] = companyCount;
+            return View();
+        }
     }
 }

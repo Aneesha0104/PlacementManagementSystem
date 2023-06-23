@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using static PMS.BOL.PMSEnums;
 
 namespace PMS.BLL
 {
@@ -16,13 +18,16 @@ namespace PMS.BLL
     {
         IUserRepository _userRepository;
         IHttpContextAccessor _httpContextAccessor;
+        PmsdbContext _dbContext;
 
-        public UserBLL(IUserRepository userRepository,IHttpContextAccessor httpContextAccessor)
+        public UserBLL(IUserRepository userRepository,IHttpContextAccessor httpContextAccessor,PmsdbContext pmsdbContext)
         {
             _userRepository = userRepository;
             _httpContextAccessor = httpContextAccessor;
+            _dbContext = pmsdbContext;
+            
         }
-
+         
         public UserDto GetUserByID(int Id)
         {
             var userDto = new UserDto();
@@ -48,6 +53,20 @@ namespace PMS.BLL
             httpcontext.SignOutAsync();
             httpcontext.Session.Clear();
         }
+        public int GetStudentCount()
+        {
+            return _userRepository.GetRecordCount(u => u.Usertype == (byte)UserType.STUDENT);
+        }
+
+        public int GetCompanyCount()
+        {
+            return _userRepository.GetRecordCount(u => u.Usertype == (byte)UserType.COMPANY);
+        }
+
+
+
+
+
 
 
 

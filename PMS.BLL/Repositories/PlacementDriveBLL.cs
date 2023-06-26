@@ -143,9 +143,12 @@ namespace PMS.BLL
             }
         }
 
-        public int GetPlacementDriveCount()
+        public int GetPlacementDriveCount(int companyID)
         {
-            return _placementDriveRepository.GetRecordCount(u => u.Status == (byte)PMSEnums.RecordStatus.ACTIVE);
+            return companyID == 0
+
+                ? _placementDriveRepository.GetRecordCount(u => u.Status == (byte)PMSEnums.RecordStatus.ACTIVE)
+                : _placementDriveRepository.GetRecordCount(u => u.Status == (byte)PMSEnums.RecordStatus.ACTIVE && u.CompanyId == companyID);
         }
 
         

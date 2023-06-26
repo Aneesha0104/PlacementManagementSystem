@@ -58,9 +58,9 @@ namespace PMS.Controllers
                 _placementAllocationBLL.InterviewComments(placementAllocationDto);
                 return RedirectToAction("AllocatedStudentsList");
             }
-            var allocatedstudents = _placementAllocationBLL.GetAllAllocatedStudent(placementAllocationDto.PlacementDriveId);
+            //var allocatedstudents = _placementAllocationBLL.GetAllAllocatedStudent(placementAllocationDto.PlacementDriveId);
 
-            return View("AllocatedStudentsList", allocatedstudents);
+            return View("AllocatedStudentsList");
         }
 
         public IActionResult PlacedStatus(int studentId)

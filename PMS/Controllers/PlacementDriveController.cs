@@ -111,12 +111,7 @@ namespace PMS.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult PlacementDriveCount()
-        {
-            var placementDrive=_placementDriveBll.GetPlacementDriveCount();
-            ViewData["PlacementDriveCount"] = placementDrive;
-            return View();
-        }
+        
 
     }
 

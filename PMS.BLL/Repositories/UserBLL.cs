@@ -25,7 +25,7 @@ namespace PMS.BLL
         {
             _userRepository = userRepository;
             _httpContextAccessor = httpContextAccessor;
-            _collegeRepository= collegeRepository
+            _collegeRepository = collegeRepository;
             
             
         }
@@ -55,18 +55,24 @@ namespace PMS.BLL
             httpcontext.SignOutAsync();
             httpcontext.Session.Clear();
         }
-        //public int GetStudentCount(int collegeID)
-        //{
-        //    return collegeID == 0
-        //        ? _userRepository.GetRecordCount(u => u.Usertype == (byte)UserType.STUDENT)
-        //        : _userRepository.GetRecordCount(u => u.Usertype == (byte)UserType.STUDENT && u.Colleges.CollegeId == collegeID);
-        //}
+        
+
+        public int GetStudentCount()
+        {
+            return _userRepository.GetRecordCount(u=>u.Usertype==(byte)UserType.STUDENT);
+        }
+
+        public int GetCollegeCount()
+        {
+            return _userRepository.GetRecordCount(u=>u.Usertype==(byte)UserType.COLLEGE);
+        }
 
         public int GetCompanyCount()
         {
             return _userRepository.GetRecordCount(u => u.Usertype == (byte)UserType.COMPANY);
         }
 
+       
 
 
 

@@ -17,7 +17,8 @@ namespace PMS.BLL
         public List<PlacementAllocationDto> GetAllPlacedStudentsList(int companyId);
         public int GetPlacedStudentsCount(int collegeId);
         public int GetAllocatedStudentsCount(int collegeID);
-
+        public int GetAllPlacedStudentsCount(int companyID);
+        public int GetallAllocatedStudentsCount(int companyID);
 
 
 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MimeKit.Encodings;
 
+
 namespace PMS.BLL
 {
     public class CollegeBLL : ICollegeBLL
@@ -91,6 +92,13 @@ namespace PMS.BLL
                 return false;
             }
         }
+
+        //public int GetStudentCountByCollegeId(int collegeID)
+        //{
+        //    return collegeID == 0
+        //        ? _collegeRepository.GetRecordCount(u => u.User.Usertype == (byte)UserType.STUDENT)
+        //        : _collegeRepository.GetRecordCount(u => u.User.Usertype == (byte)UserType.STUDENT && u.CollegeId == collegeID);
+        //}
         #region Copy 
         void CopyFromDto(CollegeDto source, College target)
         {

@@ -27,70 +27,169 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 @if (Model.UserType == (byte)PMS.BOL.PMSEnums.UserType.ADMIN)
-                {
+                    {
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                        <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>@ViewData["CompanyCount"]</h3>
+
+                                    <p>Companies</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-bag" style="font-size: 35px;"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                   
+                    <!-- ./col -->
                     <div class="col-lg-3 col-6">
                         <!-- small box -->
-                    <div class="small-box bg-info">
+                        <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>@ViewData["CompanyCount"]</h3>
+                                <h3>@ViewData["StudentCount"]</h3>
 
-                                <p>Companies</p>
+                                <p>Students</p>
                             </div>
                             <div class="icon">
-                                <i class="ion ion-bag" style="font-size: 35px;"></i>
+                                <i class="ion ion-stats-bars" style="font-size: 35px;"></i>
                             </div>
 
                         </div>
                     </div>
+                     <!-- ./col -->
+                     <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>@ViewData["CollegeCount"]</h3>
+
+                                <p>Colleges</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars" style="font-size: 35px;"></i>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    }
+                     @if (Model.UserType == (byte)PMS.BOL.PMSEnums.UserType.COLLEGE)
+                    {
+                        <!-- ./col -->
+                         <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                                <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3></h3>
+
+                                    <p>Students</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-person-add" style="font-size: 35px;"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                        <!-- ./col -->
+                         <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                                <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3>@Model.AllocatedStudentsCount</h3>
+
+                                    <p>Allocated Students</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-person-add" style="font-size: 35px;"></i>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                                <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>@Model.PlacedStudentCount</h3>
+
+                                    <p>Placed Students</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph" style="font-size: 35px;"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                     @if (Model.UserType == (byte)PMS.BOL.PMSEnums.UserType.COMPANY)
+                    {
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                                                <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3>@Model.PlacementDriveCount</h3>
+
+                                    <p>PlacementDrives</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-person-add" style="font-size: 35px;"></i>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                                                <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3>@Model.AllallocatedStudentsCount</h3>
+
+                                    <p>Allocated Students</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-person-add" style="font-size: 35px;"></i>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3>@Model.AllPlacedStudentsCount</h3>
+
+                                    <p>Placed Students</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-person-add" style="font-size: 35px;"></i>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+
+                @if (Model.UserType == (byte)PMS.BOL.PMSEnums.UserType.STUDENT)
+                {
+                    
                 }
+                
+                
+                
+                
+                
+                
                 <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-success">
-                        <div class="inner">
-                            <h3>@ViewData["StudentCount"]</h3>
-
-                            <p>student Registrations</p>
                         </div>
-                        <div class="icon">
-                            <i class="ion ion-stats-bars" style="font-size: 35px;"></i>
-                        </div>
-
                     </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-warning">
-                        <div class="inner">
-                            <h3>@ViewData["PlacementDriveCount"]</h3>
-
-                            <p>Job opportunities</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-person-add" style="font-size: 35px;"></i>
-                        </div>
-
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-danger">
-                        <div class="inner">
-                            <h3>@Model.PlacedStudentCount</h3>
-
-                            <p>Placed Students</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-pie-graph" style="font-size: 35px;"></i>
-                        </div>
-
-                    </div>
-                </div>
-                <!-- ./col -->
-            </div>
-        </div>
+                
 
     </section>
     <!-- Add content here -->

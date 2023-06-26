@@ -180,6 +180,7 @@ namespace PMS.BLL
             return bRet;
         }
 
+        //College
         public int GetPlacedStudentsCount( int collegeID)
         {
             return collegeID ==0 
@@ -194,6 +195,20 @@ namespace PMS.BLL
                 : _placementAllocationRepository.GetRecordCount(u => u.PlacementStatus == (byte)PMSEnums.PlacementStatus.ALLOCATED && u.PlacementDrive.CollegeId == collegeID);
         }
 
+        //Company
+        public int GetAllPlacedStudentsCount(int companyID)
+        {
+            return companyID == 0
+                    ? _placementAllocationRepository.GetRecordCount(u => u.PlacementStatus == (byte)PMSEnums.PlacementStatus.PLACED)
+                    : _placementAllocationRepository.GetRecordCount(u => u.PlacementStatus == (byte)PMSEnums.PlacementStatus.PLACED && u.PlacementDrive.CompanyId == companyID);
+        }
+
+        public int GetallAllocatedStudentsCount(int companyID)
+        {
+            return companyID == 0
+                ? _placementAllocationRepository.GetRecordCount(u => u.PlacementStatus == (byte)PMSEnums.PlacementStatus.ALLOCATED)
+                : _placementAllocationRepository.GetRecordCount(u => u.PlacementStatus == (byte)PMSEnums.PlacementStatus.ALLOCATED && u.PlacementDrive.CompanyId == companyID);
+        }
 
 
 

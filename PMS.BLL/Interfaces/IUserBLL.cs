@@ -14,6 +14,7 @@ namespace PMS.BLL
         public bool CheckUserAlreadyRegistered(UserDto userDto);
         public void Logout();
         public int GetStudentCount();
+        public int GetCollegeCount();
         public int GetCompanyCount();
     }
 }

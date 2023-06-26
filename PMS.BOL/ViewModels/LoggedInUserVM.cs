@@ -14,6 +14,10 @@ namespace PMS.BOL
         public byte UserType { get; set; }
         public string UserName{ get; set; }
         public int PlacedStudentCount { get; set; }
+        public int StudentCount { get; set; }
+
+        public int CompanyCount { get; set; }
+        public int AllocatedStudentsCount { get; set; }
         
     }
 }

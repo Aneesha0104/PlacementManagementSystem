@@ -18,13 +18,15 @@ namespace PMS.BLL
     {
         IUserRepository _userRepository;
         IHttpContextAccessor _httpContextAccessor;
-        PmsdbContext _dbContext;
+        ICollegeRepository _collegeRepository;
+        
 
-        public UserBLL(IUserRepository userRepository,IHttpContextAccessor httpContextAccessor,PmsdbContext pmsdbContext)
+        public UserBLL(IUserRepository userRepository,IHttpContextAccessor httpContextAccessor,CollegeRepository collegeRepository)
         {
             _userRepository = userRepository;
             _httpContextAccessor = httpContextAccessor;
-            _dbContext = pmsdbContext;
+            _collegeRepository= collegeRepository
+            
             
         }
          
@@ -53,10 +55,12 @@ namespace PMS.BLL
             httpcontext.SignOutAsync();
             httpcontext.Session.Clear();
         }
-        public int GetStudentCount()
-        {
-            return _userRepository.GetRecordCount(u => u.Usertype == (byte)UserType.STUDENT);
-        }
+        //public int GetStudentCount(int collegeID)
+        //{
+        //    return collegeID == 0
+        //        ? _userRepository.GetRecordCount(u => u.Usertype == (byte)UserType.STUDENT)
+        //        : _userRepository.GetRecordCount(u => u.Usertype == (byte)UserType.STUDENT && u.Colleges.CollegeId == collegeID);
+        //}
 
         public int GetCompanyCount()
         {

@@ -32,6 +32,10 @@ namespace PMS.Controllers
         {
             var loggedInUser =HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
             loggedInUser.PlacedStudentCount= PlacedStudentCount();
+            //loggedInUser.StudentCount= StudentCount();
+            loggedInUser.CompanyCount = CompanyCount();
+            loggedInUser.AllocatedStudentsCount = AllocatedStudentsCount();
+
             return View(loggedInUser);
         }
 
@@ -111,18 +115,25 @@ namespace PMS.Controllers
             int collegeId = loogedInUser.CollegeDto?.CollegeId ?? 0;
             return _placementAllocationBLL.GetPlacedStudentsCount(collegeId);
         }
-        public IActionResult StudentCount()
-        {
-            int studentCount = _userBLL.GetStudentCount();
-            ViewData["StudentCount"] = studentCount;
-            return View();
-        }
+        //private int StudentCount(int collegeID)
+        //{
+        //    var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+        //    int collegeId = loogedInUser.CollegeDto?.CollegeId ?? 0;
+        //    return _userBLL.GetStudentCount(collegeID);
+        //}
 
-        public IActionResult CompanyCount()
+        private int  CompanyCount()
         {
             int companyCount = _userBLL.GetCompanyCount();
-            ViewData["CompanyCount"] = companyCount;
-            return View();
+            return _userBLL.GetCompanyCount();
+    
+        }
+
+        private int AllocatedStudentsCount()
+        {
+            var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+            int collegeId = loogedInUser.CollegeDto?.CollegeId ?? 0;
+            return _placementAllocationBLL.GetAllocatedStudentsCount(collegeID);
         }
     }
 }

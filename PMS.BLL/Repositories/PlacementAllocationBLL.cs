@@ -187,6 +187,13 @@ namespace PMS.BLL
                     : _placementAllocationRepository.GetRecordCount(u => u.PlacementStatus == (byte)PMSEnums.PlacementStatus.PLACED && u.PlacementDrive.CollegeId==collegeID);
         }
 
+        public int GetAllocatedStudentsCount(int collegeID)
+        {
+            return collegeID == 0
+                ? _placementAllocationRepository.GetRecordCount(u => u.PlacementStatus == (byte)PMSEnums.PlacementStatus.ALLOCATED)
+                : _placementAllocationRepository.GetRecordCount(u => u.PlacementStatus == (byte)PMSEnums.PlacementStatus.ALLOCATED && u.PlacementDrive.CollegeId == collegeID);
+        }
+
 
 
 

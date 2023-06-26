@@ -11,10 +11,10 @@ namespace PMS.BLL
     {
         UserDto GetUserByID(int id);
         UserDto GetUserByCredentials(UserDto userDto);
-        public bool CheckUserAlreadyRegistered(UserDto userDto);
-        public void Logout();
-        public int GetStudentCount();
-        public int GetCollegeCount();
-        public int GetCompanyCount();
+        bool CheckUserAlreadyRegistered(UserDto userDto);
+        void Logout();
+        int GetStudentCount();
+        int GetCollegeCount();
+        int GetCompanyCount();
     }
 }

@@ -32,7 +32,8 @@
                             <!-- small box -->
                         <div class="small-box bg-info">
                                 <div class="inner">
-                                    <h3>@ViewData["CompanyCount"]</h3>
+                                    <h3>@Model.CompanyCount
+                                    </h3>
 
                                     <p>Companies</p>
                                 </div>
@@ -48,7 +49,7 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>@ViewData["StudentCount"]</h3>
+                                <h3>@Model.StudentCount</h3>
 
                                 <p>Students</p>
                             </div>
@@ -63,7 +64,7 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>@ViewData["CollegeCount"]</h3>
+                                <h3>@Model.CollegeCount</h3>
 
                                 <p>Colleges</p>
                             </div>
@@ -84,7 +85,7 @@
                                 <div class="inner">
                                     <h3></h3>
 
-                                    <p>Students</p>
+                                    <p>Placement Drives</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-person-add" style="font-size: 35px;"></i>
@@ -98,7 +99,7 @@
                             <!-- small box -->
                                 <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>@Model.AllocatedStudentsCount</h3>
+                                    <h3>@Model.AllocatedStudentsCount??0</h3>
 
                                     <p>Allocated Students</p>
                                 </div>
@@ -132,7 +133,7 @@
                             <!-- small box -->
                                                 <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>@Model.PlacementDriveCount</h3>
+                                    <h3>@Model.PlacementDriveCount??0</h3>
 
                                     <p>PlacementDrives</p>
                                 </div>
@@ -148,7 +149,7 @@
                             <!-- small box -->
                                                 <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>@Model.AllallocatedStudentsCount</h3>
+                                    <h3>@Model.AllallocatedStudentsCount??0</h3>
 
                                     <p>Allocated Students</p>
                                 </div>
@@ -164,7 +165,7 @@
                             <!-- small box -->
                             <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>@Model.AllPlacedStudentsCount</h3>
+                                    <h3>@Model.AllPlacedStudentsCount??0</h3>
 
                                     <p>Placed Students</p>
                                 </div>

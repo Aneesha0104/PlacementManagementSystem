@@ -21,7 +21,7 @@ namespace PMS.BLL
         ICollegeRepository _collegeRepository;
         
 
-        public UserBLL(IUserRepository userRepository,IHttpContextAccessor httpContextAccessor,CollegeRepository collegeRepository)
+        public UserBLL(IUserRepository userRepository,IHttpContextAccessor httpContextAccessor,ICollegeRepository collegeRepository)
         {
             _userRepository = userRepository;
             _httpContextAccessor = httpContextAccessor;

@@ -14,5 +14,8 @@ namespace PMS.BLL
         public bool ActivePlacementDrive(int placementdriveId);
         bool CreatePlacementDrive(PlacementDriveDto placementDriveDto);
         public int GetPlacementDriveCount(int companyID);
+        public int GetPlacementDriveCountByCollege(int collegeID);
+
+
     }
 }

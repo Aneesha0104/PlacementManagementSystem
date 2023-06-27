@@ -14,5 +14,7 @@ namespace PMS.BLL
         public StudentDto GetCollegeDepartmentDetails();
         List<StudentDto> GetAllStudentByCollegeId(int collegeId);
         public List<StudentDto> GetAllStudentsByPlacementDriveId(int placementDriveId);
+        public int GetPlacementDriveCountByStudent(int studentID);
+        public int GetAllocatedDriveCountByStudent(int studentID);
     }
 }

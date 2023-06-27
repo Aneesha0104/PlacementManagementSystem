@@ -95,8 +95,23 @@ namespace PMS.BLL
 
         }
 
-        
-        
+        public int GetAllocatedDriveCountByStudent(int studentID)
+        {
+            return studentID == 0
+                ? _studentRepository.GetRecordCount(u => u.Status == (byte)PMSEnums.PlacementStatus.PLACED)
+                : _studentRepository.GetRecordCount(u => u.Status == (byte)PMSEnums.PlacementStatus.PLACED && u.StudentId==studentID);
+        }
+
+        public int GetPlacementDriveCountByStudent(int studentID)
+        {
+            return studentID == 0
+                ? _studentRepository.GetRecordCount(u => u.Status == (byte)PMSEnums.PlacementStatus.ALLOCATED)
+                : _studentRepository.GetRecordCount(u => u.Status == (byte)PMSEnums.PlacementStatus.ALLOCATED && u.StudentId == studentID);
+        }
+
+
+
+
 
 
 

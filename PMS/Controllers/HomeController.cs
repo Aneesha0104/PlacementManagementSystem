@@ -41,7 +41,9 @@ namespace PMS.Controllers
             loggedInUser.PlacementDriveCount=PlacementDriveCount();
             loggedInUser.AllallocatedStudentsCount= AllallocatedStudentsCount();
             loggedInUser.AllPlacedStudentsCount= AllPlacedStudentsCount();
-            //loggedInUser.StudentCountByCollegeId=StudentCountByCollegeId();
+            loggedInUser.PlacementDriveCountByCollege=PlacementDriveCountByCollege();
+            loggedInUser.PlacementDriveCountByStudent=PlacementDriveCountByStudent();
+            loggedInUser.AllocatedDriveCountByStudent=AllocatedDriveCountByStudent();
             return View(loggedInUser);
         }
 
@@ -136,6 +138,12 @@ namespace PMS.Controllers
         }
 
         //college
+        private int PlacementDriveCountByCollege()
+        {
+            var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+            int collegeId = loogedInUser.CollegeDto?.CollegeId ?? 0;
+            return _placementDriveBLL.GetPlacementDriveCount(collegeId);
+        }
         private int AllocatedStudentsCount()
         {
             var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
@@ -149,12 +157,7 @@ namespace PMS.Controllers
             int collegeId = loogedInUser.CollegeDto?.CollegeId ?? 0;
             return _placementAllocationBLL.GetPlacedStudentsCount(collegeId);
         }
-        //private int StudentCountByCollegeId()
-        //{
-        //    var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
-        //    int collegeId = loogedInUser.CollegeDto?.CollegeId ?? 0;
-        //    return _collegeBLL.GetStudentCountByCollegeId(collegeId);
-        //}
+       
 
 
         //company
@@ -178,5 +181,20 @@ namespace PMS.Controllers
             int companyId = loogedInUser.CompanyDto?.CompanyId ?? 0;
             return _placementAllocationBLL.GetallAllocatedStudentsCount(companyId);
         }
+
+        //student
+        private int AllocatedDriveCountByStudent()
+        {
+            var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+            int studentId = loogedInUser.StudentDto?.StudentId ?? 0;
+            return _studentBLL.GetPlacementDriveCountByStudent(studentId);
+        }
+        private int PlacementDriveCountByStudent()
+        {
+            var loogedInUser = HttpContext.Session.GetObject<LoggedInUserVM>("LoggedInUser");
+            int studentId = loogedInUser.StudentDto?.StudentId ?? 0;
+            return _studentBLL.GetPlacementDriveCountByStudent(studentId);
+        }
+
     }
 }

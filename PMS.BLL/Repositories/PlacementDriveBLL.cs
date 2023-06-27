@@ -151,6 +151,15 @@ namespace PMS.BLL
                 : _placementDriveRepository.GetRecordCount(u => u.Status == (byte)PMSEnums.RecordStatus.ACTIVE && u.CompanyId == companyID);
         }
 
+        public int GetPlacementDriveCountByCollege(int collegeID)
+        {
+            return collegeID == 0
+
+                ? _placementDriveRepository.GetRecordCount(u => u.Status == (byte)PMSEnums.RecordStatus.ACTIVE)
+                : _placementDriveRepository.GetRecordCount(u => u.Status == (byte)PMSEnums.RecordStatus.ACTIVE && u.CollegeId == collegeID);
+        }
+
+
         
 
 

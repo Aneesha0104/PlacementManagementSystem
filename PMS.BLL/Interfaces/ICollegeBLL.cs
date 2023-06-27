@@ -11,6 +11,6 @@ namespace PMS.BLL
         bool UpdateCollege(CollegeDto collegeDto);
         bool CreateCollege(CollegeDto collegeDto);
         bool DeleteCollege(int collegeId);
-        //public int GetStudentCountByCollegeId(int collegeID);
+        
     }
 }

@@ -26,8 +26,8 @@
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                @if (Model.UserType == (byte)PMS.BOL.PMSEnums.UserType.ADMIN)
-                    {
+                @if (Model.UserType == (byte)PMS.BOL.PMSEnums.UserType.ADMIN)//ADMIN
+                 {
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
                         <div class="small-box bg-info">
@@ -40,57 +40,57 @@
                                 <div class="icon">
                                     <i class="ion ion-bag" style="font-size: 35px;"></i>
                                 </div>
-
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                    
-                    <!-- ./col -->
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-success">
-                            <div class="inner">
-                                <h3>@Model.StudentCount</h3>
+                        <!-- ./col -->
+                        <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3>@Model.StudentCount</h3>
 
-                                <p>Students</p>
-                            </div>
-                            <div class="icon">
-                                <i class="ion ion-stats-bars" style="font-size: 35px;"></i>
-                            </div>
-
+                                    <p>Students</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-stats-bars" style="font-size: 35px;"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
-                    </div>
-                     <!-- ./col -->
-                     <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-success">
-                            <div class="inner">
-                                <h3>@Model.CollegeCount</h3>
+                      </div>
+                         <!-- ./col -->
+                         <div class="col-lg-3 col-6">
+                            <!-- small box -->
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>@Model.CollegeCount</h3>
 
-                                <p>Colleges</p>
+                                    <p>Colleges</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-stats-bars" style="font-size: 35px;"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
-                            <div class="icon">
-                                <i class="ion ion-stats-bars" style="font-size: 35px;"></i>
-                            </div>
-
                         </div>
-                    </div>
 
-                    }
-                     @if (Model.UserType == (byte)PMS.BOL.PMSEnums.UserType.COLLEGE)
-                    {
+                }
+                @if (Model.UserType == (byte)PMS.BOL.PMSEnums.UserType.COLLEGE)
+                {
                         <!-- ./col -->
                          <div class="col-lg-3 col-6">
                             <!-- small box -->
-                                <div class="small-box bg-warning">
+                                <div class="small-box bg-info">
                                 <div class="inner">
-                                    <h3></h3>
+                                    <h3>@Model.PlacementDriveCountByCollege</h3>
 
-                                    <p>Placement Drives</p>
+                                    <p> Placement Drives</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-person-add" style="font-size: 35px;"></i>
                                 </div>
-
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         
@@ -99,14 +99,14 @@
                             <!-- small box -->
                                 <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>@Model.AllocatedStudentsCount??0</h3>
+                                    <h3>@Model.AllocatedStudentsCount</h3>
 
                                     <p>Allocated Students</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-person-add" style="font-size: 35px;"></i>
                                 </div>
-
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
 
@@ -122,63 +122,92 @@
                                 <div class="icon">
                                     <i class="ion ion-pie-graph" style="font-size: 35px;"></i>
                                 </div>
-
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     }
-                     @if (Model.UserType == (byte)PMS.BOL.PMSEnums.UserType.COMPANY)
-                    {
+                @if (Model.UserType == (byte)PMS.BOL.PMSEnums.UserType.COMPANY)
+                 {
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                                                <div class="small-box bg-warning">
+                             <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>@Model.PlacementDriveCount??0</h3>
+                                    <h3>@Model.PlacementDriveCount</h3>
 
                                     <p>PlacementDrives</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-person-add" style="font-size: 35px;"></i>
                                 </div>
-
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
 
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                                                <div class="small-box bg-warning">
+                             <div class="small-box bg-info">
                                 <div class="inner">
-                                    <h3>@Model.AllallocatedStudentsCount??0</h3>
+                                    <h3>@Model.AllallocatedStudentsCount</h3>
 
                                     <p>Allocated Students</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-person-add" style="font-size: 35px;"></i>
                                 </div>
-
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
 
                         <!-- ./col -->
                         <div class="col-lg-3 col-6">
                             <!-- small box -->
-                            <div class="small-box bg-warning">
+                            <div class="small-box bg-danger">
                                 <div class="inner">
-                                    <h3>@Model.AllPlacedStudentsCount??0</h3>
+                                    <h3>@Model.AllPlacedStudentsCount</h3>
 
                                     <p>Placed Students</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-person-add" style="font-size: 35px;"></i>
                                 </div>
-
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     }
 
                 @if (Model.UserType == (byte)PMS.BOL.PMSEnums.UserType.STUDENT)
                 {
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>@Model.AllocatedDriveCountByStudent</h3>
+
+                                <p>Allocated Drive</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person-add" style="font-size: 35px;"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>@Model.PlacementDriveCountByStudent</h3>
+
+                                <p>Placed Company</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person-add" style="font-size: 35px;"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
                     
                 }
                 
@@ -187,9 +216,6 @@
                 
                 
                 
-                <!-- ./col -->
-                        </div>
-                    </div>
                 
 
     </section>

@@ -19,9 +19,12 @@ namespace PMS.BOL
         public int CompanyCount { get; set; }
         public int AllocatedStudentsCount { get; set; }
         public int PlacementDriveCount { get; set; }
+        public int PlacementDriveCountByCollege { get; set; }
+        public int PlacementDriveCountByStudent { get; set; }
         public int AllPlacedStudentsCount { get; set; }
         public int AllallocatedStudentsCount { get; set; }
         public int StudentCountByCollegeId { get; set; }
+        public int AllocatedDriveCountByStudent { get;set; }
         
     }
 }
